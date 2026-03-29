@@ -10,16 +10,32 @@ export default function Home() {
         }}
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span
-              className="text-lg font-medium tracking-tight"
-              style={{ fontFamily: "'DM Sans', sans-serif", color: '#F5F0E8' }}
+          <div className="flex items-center gap-3">
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                background: 'rgba(217,119,6,0.15)',
+                border: '1px solid rgba(217,119,6,0.3)',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#D97706',
+                fontSize: '16px',
+                fontWeight: 700,
+              }}
             >
-              WRI
-            </span>
+              &#10003;
+            </div>
             <span
-              className="text-sm"
-              style={{ color: '#6B5B4E' }}
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: '18px',
+                fontWeight: 600,
+                letterSpacing: '-0.01em',
+                color: '#F5F0E8',
+              }}
             >
               Staff Comms
             </span>
