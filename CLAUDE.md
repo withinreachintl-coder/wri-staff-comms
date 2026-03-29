@@ -6,13 +6,12 @@
 
 ## Project Overview
 
-- **Product:** Daily Ops Checklist — a restaurant operations SaaS tool
-- **URL:** https://ops.wireach.tools
-- **Repo:** withinreachintl-coder/wri-restaurant-ops (branch: main)
+- **Product:** Staff Communication Tool — restaurant team coordination SaaS
+- **URL:** https://staff.wireach.tools
+- **Repo:** withinreachintl-coder/wri-staff-comms (branch: main)
 - **Stack:** Next.js 14.1.0, Supabase, Tailwind CSS, TypeScript, Vercel
-- **Stripe:** $19/mo, 14-day free trial
-- **Target user:** Independent restaurant owners and managers
-
+- **Stripe:** $29/mo, 14-day free trial
+- **Target user:** Independent restaurant owners replacing WhatsApp group chats
 ---
 
 ## Design Direction — Non-Negotiable
