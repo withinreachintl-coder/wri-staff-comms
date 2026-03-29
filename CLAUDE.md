@@ -1,4 +1,4 @@
-# WRI Staff Comms — Claude Code Instructions
+# WRI Daily Ops Checklist — Claude Code Instructions
 
 > Read this file at the start of every session before touching any code.
 
@@ -6,53 +6,39 @@
 
 ## Project Overview
 
-- **Product:** Staff Communication Tool — restaurant team coordination
-- **URL:** https://staff.wireach.tools
-- **Repo:** withinreachintl-coder/wri-staff-comms (branch: main)
+- **Product:** Daily Ops Checklist — a restaurant operations SaaS tool
+- **URL:** https://ops.wireach.tools
+- **Repo:** withinreachintl-coder/wri-restaurant-ops (branch: main)
 - **Stack:** Next.js 14.1.0, Supabase, Tailwind CSS, TypeScript, Vercel
-- **Stripe:** $29/mo, 14-day free trial
-- **Target user:** Restaurant owners replacing WhatsApp group chats
-- **Sister product:** Daily Ops Checklist at ops.wireach.tools — this product must look like family
-
----
-
-## Current State
-
-- Infrastructure only — no features built yet
-- Supabase schema exists (5 tables — see below)
-- Landing page exists but needs full redesign to match WRI brand
-- No auth flow built yet
-- No announcement or shift swap features built yet
+- **Stripe:** $19/mo, 14-day free trial
+- **Target user:** Independent restaurant owners and managers
 
 ---
 
 ## Design Direction — Non-Negotiable
 
-This product is part of the WRI Tools suite alongside Daily Ops Checklist.
-Both products must feel like they came from the same kitchen.
-A user of Daily Ops who visits Staff Comms should immediately recognize the brand.
+This product serves busy restaurant operators. Every design decision must feel
+like it belongs in a well-run kitchen: dark, confident, warm, professional.
+Nothing generic. Nothing that looks like it came from an AI template.
 
-### Aesthetic: Warm Utilitarian — Same as Daily Ops
+### Aesthetic: Warm Utilitarian
 
-Same dark, confident, amber-lit feel. Built for busy restaurant operators.
+Think: cast iron, amber light, chalkboard menus, a kitchen that means business.
 - Dark backgrounds (#1C1917 primary, #141210 deep)
 - Amber accent (#D97706) — used sparingly, never overused
 - Warm off-white text (#F5F0E8) — never pure white
 - Muted warm grays for secondary text (#A89880, #6B5B4E)
-- NO light blue backgrounds — ever
-- NO purple accents — ever
-- NO emoji icons in the UI — use SVG icons only
-- NO generic card-on-white-background layouts
 
-### Typography Rules — Identical to Daily Ops
+### Typography Rules
 
 - **Display / Headings:** Playfair Display (serif) — import from Google Fonts
 - **Body / UI:** DM Sans — import from Google Fonts
 - NEVER use: Inter, Roboto, Arial, system-ui as the primary font
+- NEVER use: generic sans-serif stacks for headings
 - Heading weight: 700 for hero, 500 for section heads
 - Body weight: 300 for paragraphs, 400 for UI labels, 500 for emphasis
 
-### Color System — Shared with Daily Ops
+### Color System
 
 ```css
 --color-bg-primary: #1C1917;
@@ -78,17 +64,17 @@ Same dark, confident, amber-lit feel. Built for busy restaurant operators.
 - No drop shadows — use border and background contrast instead
 - No purple gradients — ever
 - No blue primary buttons — amber only for primary CTAs
-- Primary button: `background: #D97706; color: #1C1917; border-radius: 4px;`
-- Ghost button: `background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #F5F0E8;`
+- Checkboxes: amber fill when checked (#D97706), dark border when open
 
-### Landing Page Must Include
+### Buttons
 
-- Same nav style as Daily Ops (dark bar, logo left, CTA button right)
-- Hero headline using Playfair Display — speaks to the pain of WhatsApp chaos
-- Amber CTA button — "Start 14-Day Free Trial"
-- Feature highlights: Announcements, Shift Swaps, Read Receipts
-- Pricing: $29/mo, 14-day free trial, no credit card
-- Footer note: "Part of the WiReach Tools suite" linking to wireach.tools
+```css
+/* Primary */
+background: #D97706; color: #1C1917; border-radius: 4px; font-weight: 500;
+
+/* Ghost / Secondary */
+background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #F5F0E8;
+```
 
 ---
 
@@ -96,11 +82,17 @@ Same dark, confident, amber-lit feel. Built for busy restaurant operators.
 
 ### TypeScript
 - Always handle null explicitly with ternary operators — NOT short-circuit evaluation
+- Example: `disabled={itemLimit ? !itemLimit.canAdd : false}`
 - Never use `!` non-null assertions on values that could realistically be null
 
 ### Supabase
 - Always get org_id from the authenticated user session — never hardcode UUIDs
 - Pattern: `supabase.auth.getUser()` → look up org from users/organizations table
+- Table for checklist tasks: `checklist_items` (NOT `checklist_tasks`)
+- RLS: debug in SQL editor, not the Supabase UI policy builder
+
+### Next.js 14.1.0
+- Auth: use `@supabase/ssr` — NOT the deprecated `@supabase/auth-helpers-nextjs`
 - Supabase client: always import from `@/lib/supabase`
 - Every page must have a root layout (`app/layout.tsx`)
 
@@ -112,50 +104,67 @@ Same dark, confident, amber-lit feel. Built for busy restaurant operators.
 
 ---
 
-## Database Tables (Supabase — wri-restaurant-ops project)
+## Security Rules — Non-Negotiable
 
-| Table | Purpose |
-|---|---|
-| `organizations` | Org records |
-| `users` | User profiles |
-| `announcements` | Manager broadcasts to staff |
-| `announcement_reads` | Read receipt tracking per user |
-| `shift_swaps` | Staff requests, claims, manager approval |
+### API Keys & Secrets
+- NEVER put real API keys in `.env.example` — placeholders only
+- Example: `RESEND_API_KEY=your_resend_api_key_here`
+- Real keys go in `.env.local` only — this file is in `.gitignore` and never commits
+- If you accidentally commit a real key, tell Keon immediately so it can be revoked
+- Before every push, visually confirm `.env.example` contains no real key values
+
+### node_modules
+- NEVER commit `node_modules` to git — ever
+- Before the first `git add .` on any repo, confirm `node_modules/` is in `.gitignore`
+- Run `git status` before `git add .` and check what files are staged
+- If node_modules appears in `git status`, stop and add it to `.gitignore` first
+
+### Verified incidents (March 2026)
+- Resend API key was committed to `.env.example` in wri-restaurant-ops — key revoked, new key issued
+- node_modules committed in wri-staff-comms first push — required `filter-branch` to clean history
 
 ---
 
-## Environment Variables (add to Vercel before first deploy)
+## Database Tables (Supabase — wri-restaurant-ops)
+
+| Table | Purpose |
+|---|---|
+| `checklist_items` | Checklist task items (use this one) |
+| `checklists` | Opening/closing checklist records |
+| `organizations` | Org records |
+| `users` | User profiles |
+| `checklist_completions` | Completion tracking |
+
+---
+
+## Current Bugs (fix in priority order)
+
+1. **Add Item / Delete** — org_id is hardcoded. Must pull from real auth session.
+2. **Photo upload** — button exists but file input not properly wired.
+3. **Stripe billing page** — in-app upgrade flow not built yet.
+
+---
+
+## Environment Variables (already set in Vercel — do not re-add)
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - `RESEND_API_KEY`
 - `STRIPE_SECRET_KEY`
 
-Use the same Supabase project as wri-restaurant-ops.
-
----
-
-## Build Priority Order
-
-1. Landing page redesign — match WRI brand (do this first)
-2. Auth flow — magic link via Supabase + Resend
-3. Announcements feature — create, broadcast, read receipts
-4. Shift swap feature — request, claim, manager approve
-5. Manager dashboard — see all staff, read rates, pending swaps
-
 ---
 
 ## Deployment
 
 - Vercel auto-deploys on every push to `main`
-- Custom domain: staff.wireach.tools (already configured in Vercel)
 - Check vercel.com after pushing to confirm a build triggered
+- If no new build appears within 60 seconds, the push likely went to the wrong branch
 
 ---
 
 ## What Success Looks Like
 
-A restaurant owner who uses Daily Ops Checklist should see Staff Comms and think:
-*"This is from the same people — I already trust this."*
+Every screen should make a restaurant owner think:
+*"This was built by someone who understands my operation."*
 
-Not: *"This looks like a completely different product."*
+Not: *"This looks like another generic SaaS tool."*
