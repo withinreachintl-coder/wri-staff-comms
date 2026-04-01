@@ -51,6 +51,7 @@ export default function Dashboard() {
   const [shiftSwaps, setShiftSwaps] = useState<ShiftSwap[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [redirecting, setRedirecting] = useState(false)
   const [trialDaysLeft, setTrialDaysLeft] = useState(0)
 
   useEffect(() => {
@@ -66,6 +67,7 @@ export default function Dashboard() {
       const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
 
       if (authError || !authUser) {
+        setRedirecting(true)
         router.push('/login')
         return
       }
@@ -151,11 +153,11 @@ export default function Dashboard() {
     router.push('/')
   }
 
-  if (loading) {
+  if (loading || redirecting) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
-          Loading...
+        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 300 }}>
+          {redirecting ? 'Redirecting to login...' : 'Loading dashboard...'}
         </div>
       </main>
     )
