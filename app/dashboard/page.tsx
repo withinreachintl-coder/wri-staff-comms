@@ -30,6 +30,11 @@ type Announcement = {
   created_at: string
 }
 
+type ShiftSwap = {
+  id: string
+  status: 'open' | 'claimed' | 'approved' | 'rejected' | 'canceled'
+}
+
 type TeamMember = {
   id: string
   name: string
@@ -43,6 +48,7 @@ export default function Dashboard() {
   const [org, setOrg] = useState<Organization | null>(null)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [announcements, setAnnouncements] = useState<Announcement[]>([])
+  const [shiftSwaps, setShiftSwaps] = useState<ShiftSwap[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [trialDaysLeft, setTrialDaysLeft] = useState(0)
@@ -121,6 +127,16 @@ export default function Dashboard() {
 
       if (!announcementError && announcementData) {
         setAnnouncements(announcementData)
+      }
+
+      // Get shift swaps summary
+      const { data: shiftSwapData } = await supabase
+        .from('shift_swaps')
+        .select('id, status')
+        .eq('org_id', userData.org_id)
+
+      if (shiftSwapData) {
+        setShiftSwaps(shiftSwapData)
       }
     } catch (err) {
       console.error('Dashboard error:', err)
@@ -229,6 +245,43 @@ export default function Dashboard() {
           </div>
         </div>
       </header>
+
+      {/* Navigation tabs */}
+      <div style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '32px' }}>
+          <Link
+            href="/dashboard"
+            style={{
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#F5F0E8',
+              borderBottom: '2px solid #D97706',
+              padding: '16px 0',
+              textDecoration: 'none',
+              display: 'block',
+            }}
+          >
+            Announcements
+          </Link>
+          <Link
+            href="/shift-swaps"
+            style={{
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#6B5B4E',
+              borderBottom: '2px solid transparent',
+              padding: '16px 0',
+              textDecoration: 'none',
+              display: 'block',
+            }}
+            className="hover:opacity-80 transition-opacity"
+          >
+            Shift Swaps
+          </Link>
+        </div>
+      </div>
 
       {/* Trial banner */}
       {org.subscription_status === 'trial' && (
@@ -372,6 +425,49 @@ export default function Dashboard() {
                     </p>
                   </div>
                 )}
+              </div>
+            </div>
+
+            {/* Shift swaps quick stats */}
+            <div>
+              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
+                Shift Swaps
+              </h3>
+              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+                  <div>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                      Open
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '18px', fontWeight: 600, color: '#D97706', margin: 0 }}>
+                      {shiftSwaps.filter((s) => s.status === 'open').length}
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                      Pending
+                    </p>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '18px', fontWeight: 600, color: '#3B82F6', margin: 0 }}>
+                      {shiftSwaps.filter((s) => s.status === 'claimed').length}
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/shift-swaps"
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    color: '#D97706',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    padding: '8px 0',
+                  }}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  View all shifts →
+                </Link>
               </div>
             </div>
 
