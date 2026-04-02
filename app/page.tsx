@@ -41,7 +41,7 @@ export default function Home() {
             </span>
           </div>
           <a
-            href="/signup"
+            href="/login"
             className="text-sm font-medium px-5 py-2"
             style={{
               background: '#D97706',
@@ -84,7 +84,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/signup"
+              href="/login"
               className="text-base font-medium px-8 py-3 inline-block"
               style={{
                 background: '#D97706',
@@ -455,7 +455,7 @@ export default function Home() {
             </ul>
 
             <a
-              href="/signup"
+              href="/login"
               className="block w-full text-center text-base font-medium py-3"
               style={{
                 background: '#D97706',
