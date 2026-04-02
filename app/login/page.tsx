@@ -52,7 +52,7 @@ export default function LoginPage() {
             fontWeight: 300,
             color: '#A89880',
           }}>
-            Sign in to your team's communication hub
+            Sign in to your restaurant team's communication hub
           </p>
         </div>
 
