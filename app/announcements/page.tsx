@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../lib/supabase'
 
 interface User {
   id: string
@@ -143,7 +143,7 @@ export default function AnnouncementsPage() {
         console.error('Error loading authors:', authorError)
       } else {
         const authorMap: Record<string, Author> = {}
-        authorData.forEach((a) => {
+        authorData.forEach((a: Author) => {
           authorMap[a.id] = a
         })
         setAuthors(authorMap)

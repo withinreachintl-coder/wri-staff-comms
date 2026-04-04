@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '../lib/supabase'
+import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
 
 type User = {
@@ -114,11 +114,11 @@ export default function ShiftSwapsPage() {
 
       if (shiftsData && teamData) {
         // Enrich shifts with user names
-        const enrichedShifts = shiftsData.map((shift) => ({
+        const enrichedShifts = shiftsData.map((shift: ShiftSwap) => ({
           ...shift,
-          requester_name: teamData.find((m) => m.id === shift.requester_id)?.name || 'Unknown',
-          claimer_name: shift.claimer_id ? teamData.find((m) => m.id === shift.claimer_id)?.name : null,
-          approver_name: shift.approver_id ? teamData.find((m) => m.id === shift.approver_id)?.name : null,
+          requester_name: teamData.find((m: User) => m.id === shift.requester_id)?.name || 'Unknown',
+          claimer_name: shift.claimer_id ? teamData.find((m: User) => m.id === shift.claimer_id)?.name : null,
+          approver_name: shift.approver_id ? teamData.find((m: User) => m.id === shift.approver_id)?.name : null,
         }))
 
         setShifts(enrichedShifts)
