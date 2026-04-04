@@ -499,15 +499,15 @@ export default function Dashboard() {
                     Plan
                   </p>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: '#F5F0E8', margin: 0 }}>
-                    {org.subscription_status === 'trial' ? 'Free Trial' : 'Pro'}
+                    {org.subscription_status === 'trial' || !org.subscription_status ? 'Free Trial' : 'Pro'}
                   </p>
                 </div>
                 <div>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
                     Status
                   </p>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: org.subscription_status === 'trial' ? '#D97706' : '#10B981', margin: 0 }}>
-                    {org.subscription_status === 'trial' ? 'Trial' : 'Active'}
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: org.subscription_status === 'trial' || !org.subscription_status ? '#D97706' : '#10B981', margin: 0 }}>
+                    {org.subscription_status === 'trial' || !org.subscription_status ? 'Trial' : 'Active'}
                   </p>
                 </div>
               </div>
