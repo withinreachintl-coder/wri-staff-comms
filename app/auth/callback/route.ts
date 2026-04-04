@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
+  const restaurantName = requestUrl.searchParams.get('restaurant')
 
   if (code) {
     try {
@@ -49,11 +50,13 @@ export async function GET(request: Request) {
 
       // Upsert org and user records (non-blocking)
       try {
-        // Upsert org
+        // Upsert org with restaurant name from signup form (fallback to email domain if not provided)
+        const orgName = restaurantName || user.email?.split('@')[0] || 'My Restaurant'
+        
         const { data: org } = await supabase
           .from('organizations')
           .upsert(
-            { name: 'My Restaurant', owner_email: user.email },
+            { name: orgName, owner_email: user.email },
             { onConflict: 'owner_email', ignoreDuplicates: true }
           )
           .select('id')

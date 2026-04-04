@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
+  const [restaurantName, setRestaurantName] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
@@ -15,10 +16,16 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
 
+    // Pass restaurant name as URL fragment that won't be sent to server
+    const redirectUrl = new URL(`${window.location.origin}/auth/callback`)
+    if (restaurantName) {
+      redirectUrl.searchParams.set('restaurant', restaurantName)
+    }
+
     const { error: authError } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: redirectUrl.toString(),
       },
     })
 
@@ -94,6 +101,43 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="you@restaurant.com"
+                  style={{
+                    width: '100%',
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    color: '#F5F0E8',
+                    background: 'rgba(255,255,255,0.04)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: '4px',
+                    padding: '12px 16px',
+                    outline: 'none',
+                    boxSizing: 'border-box',
+                    transition: 'border-color 0.2s ease',
+                  }}
+                />
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <label
+                  htmlFor="restaurant"
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    color: '#A89880',
+                    marginBottom: '8px',
+                  }}
+                >
+                  Restaurant name (optional)
+                </label>
+                <input
+                  id="restaurant"
+                  type="text"
+                  value={restaurantName}
+                  onChange={(e) => setRestaurantName(e.target.value)}
+                  placeholder="e.g., Guthrie's Restaurant"
                   style={{
                     width: '100%',
                     fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
