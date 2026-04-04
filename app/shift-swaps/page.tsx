@@ -295,7 +295,7 @@ export default function ShiftSwapsPage() {
   }
 
   return (
-    <main style={{ background: '#141210', minHeight: '100vh' }}>
+    <main style={{ background: '#FAFAF9', minHeight: '100vh' }}>
       {/* Header */}
       <header style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

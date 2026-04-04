@@ -193,7 +193,7 @@ export default function AnnouncementsPage() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: '#141210' }}>
+    <main className="min-h-screen" style={{ background: '#FAFAF9' }}>
       {/* Navigation */}
       <nav
         className="border-b"
