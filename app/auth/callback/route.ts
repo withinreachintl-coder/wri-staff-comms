@@ -59,16 +59,18 @@ export async function GET(request: Request) {
       if (needsUserCreation) {
         // Create organization
         console.log('Creating organization for user:', user.id, user.email)
+        const orgName = user.email?.split('@')[0] || 'My Restaurant'
+        const orgEmail = user.email || ''
+        
         const { data: newOrg, error: orgCreateError } = await supabase
           .from('organizations')
           .insert([{
-            name: user.email?.split('@')[0] || 'My Restaurant',
-            owner_email: user.email || '',
+            name: orgName,
+            owner_email: orgEmail,
           }])
           .select('id')
-          .single()
 
-        if (orgCreateError || !newOrg) {
+        if (orgCreateError) {
           console.error('Failed to create organization:', {
             error: orgCreateError,
             code: orgCreateError?.code,
@@ -78,7 +80,15 @@ export async function GET(request: Request) {
           })
           return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
         }
-        console.log('Organization created:', newOrg.id)
+
+        // Get the created org ID (handle both single and array responses)
+        const orgId = Array.isArray(newOrg) && newOrg.length > 0 ? newOrg[0].id : (newOrg?.id)
+        
+        if (!orgId) {
+          console.error('No organization ID returned after insert')
+          return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
+        }
+        console.log('Organization created:', orgId)
 
         // Create user with org_id
         const { error: userCreateError } = await supabase
@@ -87,7 +97,7 @@ export async function GET(request: Request) {
             id: user.id,
             email: user.email,
             name: user.email?.split('@')[0] || 'Manager',
-            org_id: newOrg.id,
+            org_id: orgId,
             role: 'manager',
           }], {
             onConflict: 'id'
