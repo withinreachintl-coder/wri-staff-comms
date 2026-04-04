@@ -53,10 +53,19 @@ export async function GET(request: Request) {
         // Upsert org with restaurant name from signup form (fallback to email domain if not provided)
         const orgName = restaurantName || user.email?.split('@')[0] || 'My Restaurant'
         
+        // Calculate 14-day trial end date
+        const trialEndsAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+        
         const { data: org } = await supabase
           .from('organizations')
           .upsert(
-            { name: orgName, owner_email: user.email },
+            {
+              name: orgName,
+              owner_email: user.email,
+              subscription_status: 'trial',
+              plan: 'free',
+              trial_ends_at: trialEndsAt,
+            },
             { onConflict: 'owner_email', ignoreDuplicates: true }
           )
           .select('id')
