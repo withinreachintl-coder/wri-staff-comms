@@ -47,16 +47,20 @@ export async function GET(request: Request) {
         return NextResponse.redirect(new URL('/login?error=no_session', request.url))
       }
 
-      // Check if user exists in database
-      const { data: userData, error: selectError } = await supabase
+      // Check if user already exists in database
+      const { data: existingUser } = await supabase
         .from('users')
-        .select('org_id, role')
+        .select('id, org_id')
         .eq('id', user.id)
         .single()
 
-      const needsUserCreation = selectError?.code === 'PGRST116' || !userData?.org_id
+      // If user already exists with org_id, skip creation and go to dashboard
+      if (existingUser?.id && existingUser?.org_id) {
+        return NextResponse.redirect(new URL('/dashboard', request.url))
+      }
 
-      if (needsUserCreation) {
+      // Only create org/user if user doesn't exist yet
+      if (!existingUser) {
         // Create organization
         console.log('Creating organization for user:', user.id, user.email)
         const orgName = user.email?.split('@')[0] || 'My Restaurant'
