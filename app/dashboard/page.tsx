@@ -368,10 +368,11 @@ export default function Dashboard() {
                   <div
                     key={announcement.id}
                     style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      background: '#FFFFFF',
+                      border: '1px solid #E5E0D8',
                       borderRadius: '8px',
                       padding: '20px',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                     }}
                   >
                     <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#F5F0E8', margin: '0 0 8px 0' }}>
@@ -389,11 +390,12 @@ export default function Dashboard() {
             ) : (
               <div
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px dashed rgba(255,255,255,0.1)',
+                  background: '#FFFFFF',
+                  border: '1px dashed #E5E0D8',
                   borderRadius: '8px',
                   padding: '40px 24px',
                   textAlign: 'center',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                 }}
               >
                 <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', color: '#6B5B4E', margin: 0 }}>
@@ -410,7 +412,7 @@ export default function Dashboard() {
               <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
                 Team ({teamMembers.length})
               </h3>
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', overflow: 'hidden' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
                 {teamMembers.length > 0 ? (
                   <div>
                     {teamMembers.map((member, index) => (
@@ -450,7 +452,7 @@ export default function Dashboard() {
               <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
                 Shift Swaps
               </h3>
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', marginBottom: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
                   <div>
                     <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
@@ -493,7 +495,7 @@ export default function Dashboard() {
               <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
                 Account
               </h3>
-              <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '16px' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
                 <div style={{ marginBottom: '12px' }}>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
                     Plan
