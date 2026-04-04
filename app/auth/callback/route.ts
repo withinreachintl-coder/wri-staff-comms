@@ -58,6 +58,7 @@ export async function GET(request: Request) {
 
       if (needsUserCreation) {
         // Create organization
+        console.log('Creating organization for user:', user.id, user.email)
         const { data: newOrg, error: orgCreateError } = await supabase
           .from('organizations')
           .insert([{
@@ -68,9 +69,16 @@ export async function GET(request: Request) {
           .single()
 
         if (orgCreateError || !newOrg) {
-          console.error('Failed to create organization:', orgCreateError)
+          console.error('Failed to create organization:', {
+            error: orgCreateError,
+            code: orgCreateError?.code,
+            message: orgCreateError?.message,
+            details: orgCreateError?.details,
+            hint: orgCreateError?.hint,
+          })
           return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
         }
+        console.log('Organization created:', newOrg.id)
 
         // Create user with org_id
         const { error: userCreateError } = await supabase
