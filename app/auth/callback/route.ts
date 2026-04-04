@@ -72,17 +72,14 @@ export async function GET(request: Request) {
 
         if (orgCreateError) {
           console.error('=== ORG CREATION FAILED ===')
-          console.error('Full error object:', JSON.stringify(orgCreateError, null, 2))
           console.error('Error code:', orgCreateError?.code)
           console.error('Error message:', orgCreateError?.message)
-          console.error('Error status:', orgCreateError?.status)
-          console.error('Error statusText:', orgCreateError?.statusText)
           console.error('==================')
           return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
         }
 
         // Get the created org ID (handle both single and array responses)
-        const orgId = Array.isArray(newOrg) && newOrg.length > 0 ? newOrg[0].id : (newOrg?.id)
+        const orgId = Array.isArray(newOrg) && newOrg.length > 0 ? (newOrg[0] as any).id : (newOrg as any)?.id
         
         if (!orgId) {
           console.error('No organization ID returned after insert')
