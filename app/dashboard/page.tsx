@@ -78,7 +78,7 @@ export default function Dashboard() {
       for (let i = 0; i < 2; i++) {
         const result = await supabase
           .from('users')
-          .select('id, email, name, role')
+          .select('id, email, name, role, org_id')
           .eq('id', authUser.id)
           .single()
         
