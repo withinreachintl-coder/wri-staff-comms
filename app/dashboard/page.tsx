@@ -412,7 +412,7 @@ export default function Dashboard() {
               <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
                 Team ({teamMembers.length})
               </h3>
-              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', overflow: 'hidden' }}>
                 {teamMembers.length > 0 ? (
                   <div>
                     {teamMembers.map((member, index) => (
