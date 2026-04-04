@@ -71,13 +71,13 @@ export async function GET(request: Request) {
           .select('id')
 
         if (orgCreateError) {
-          console.error('Failed to create organization:', {
-            error: orgCreateError,
-            code: orgCreateError?.code,
-            message: orgCreateError?.message,
-            details: orgCreateError?.details,
-            hint: orgCreateError?.hint,
-          })
+          console.error('=== ORG CREATION FAILED ===')
+          console.error('Full error object:', JSON.stringify(orgCreateError, null, 2))
+          console.error('Error code:', orgCreateError?.code)
+          console.error('Error message:', orgCreateError?.message)
+          console.error('Error status:', orgCreateError?.status)
+          console.error('Error statusText:', orgCreateError?.statusText)
+          console.error('==================')
           return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
         }
 
