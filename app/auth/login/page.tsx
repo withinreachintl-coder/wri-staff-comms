@@ -33,8 +33,15 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4" style={{ background: '#1C1917' }}>
-      <div style={{ maxWidth: '420px', width: '100%' }}>
+    <main style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '16px',
+      backgroundColor: '#1C1917',
+    }}>
+      <div style={{ maxWidth: '420px', width: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <h1 style={{
             fontFamily: 'var(--font-playfair), "Playfair Display", serif',

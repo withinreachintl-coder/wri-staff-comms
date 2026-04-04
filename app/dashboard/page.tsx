@@ -72,12 +72,27 @@ export default function Dashboard() {
         return
       }
 
-      // Get user profile
-      const { data: userData, error: userError } = await supabase
-        .from('users')
-        .select('id, email, name, role')
-        .eq('id', authUser.id)
-        .single()
+      // Get user profile with retry
+      let userData = null
+      let userError = null
+      for (let i = 0; i < 2; i++) {
+        const result = await supabase
+          .from('users')
+          .select('id, email, name, role')
+          .eq('id', authUser.id)
+          .single()
+        
+        userData = result.data
+        userError = result.error
+        
+        // If successful, break out of retry loop
+        if (userData) break
+        
+        // If this is the last retry, don't wait
+        if (i < 1) {
+          await new Promise(resolve => setTimeout(resolve, 500))
+        }
+      }
 
       if (userError || !userData) {
         setError('Failed to load user profile')
