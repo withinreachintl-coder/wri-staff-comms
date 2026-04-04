@@ -47,70 +47,35 @@ export async function GET(request: Request) {
         return NextResponse.redirect(new URL('/login?error=no_session', request.url))
       }
 
-      // Check if user already exists in database
-      const { data: existingUser } = await supabase
-        .from('users')
-        .select('id, org_id')
-        .eq('id', user.id)
-        .single()
-
-      // If user already exists with org_id, skip creation and go to dashboard
-      if (existingUser?.id && existingUser?.org_id) {
-        return NextResponse.redirect(new URL('/dashboard', request.url))
-      }
-
-      // Only create org/user if user doesn't exist yet
-      if (!existingUser) {
-        // Create organization
-        console.log('Creating organization for user:', user.id, user.email)
-        const orgName = user.email?.split('@')[0] || 'My Restaurant'
-        const orgEmail = user.email || ''
-        
-        const { data: newOrg, error: orgCreateError } = await supabase
+      // Upsert org and user records (non-blocking)
+      try {
+        // Upsert org
+        const { data: org } = await supabase
           .from('organizations')
-          .insert([{
-            name: orgName,
-            owner_email: orgEmail,
-          }])
+          .upsert(
+            { name: 'My Restaurant', owner_email: user.email },
+            { onConflict: 'owner_email', ignoreDuplicates: true }
+          )
           .select('id')
+          .single()
 
-        if (orgCreateError) {
-          console.error('=== ORG CREATION FAILED ===')
-          console.error('Error code:', orgCreateError?.code)
-          console.error('Error message:', orgCreateError?.message)
-          console.error('==================')
-          return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
+        const orgId = org?.id
+
+        if (orgId) {
+          // Upsert user
+          await supabase
+            .from('users')
+            .upsert(
+              { id: user.id, org_id: orgId, name: user.email, email: user.email, role: 'admin' },
+              { onConflict: 'id', ignoreDuplicates: true }
+            )
         }
-
-        // Get the created org ID (handle both single and array responses)
-        const orgId = Array.isArray(newOrg) && newOrg.length > 0 ? (newOrg[0] as any).id : (newOrg as any)?.id
-        
-        if (!orgId) {
-          console.error('No organization ID returned after insert')
-          return NextResponse.redirect(new URL('/login?error=org_creation_failed', request.url))
-        }
-        console.log('Organization created:', orgId)
-
-        // Create user with org_id
-        const { error: userCreateError } = await supabase
-          .from('users')
-          .upsert([{
-            id: user.id,
-            email: user.email,
-            name: user.email?.split('@')[0] || 'Manager',
-            org_id: orgId,
-            role: 'manager',
-          }], {
-            onConflict: 'id'
-          })
-
-        if (userCreateError) {
-          console.error('Failed to create user:', userCreateError)
-          return NextResponse.redirect(new URL('/login?error=user_creation_failed', request.url))
-        }
+      } catch (e) {
+        // Log but do not block login
+        console.error('Org setup error (non-fatal):', e)
       }
 
-      // All auth succeeded - redirect to dashboard
+      // Always redirect to dashboard regardless
       return NextResponse.redirect(new URL('/dashboard', request.url))
     } catch (error) {
       console.error('Unexpected auth callback error:', error)
