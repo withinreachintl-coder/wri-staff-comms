@@ -237,7 +237,7 @@ export default function AnnouncementsPage() {
             <span
               style={{
                 fontSize: '13px',
-                color: '#A89880',
+                color: '#1C1917',
                 fontFamily: "'DM Sans', sans-serif",
               }}
             >
@@ -279,7 +279,7 @@ export default function AnnouncementsPage() {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '14px',
-              color: '#A89880',
+              color: '#1C1917',
             }}
           >
             {announcements.length} announcement{announcements.length !== 1 ? 's' : ''}
@@ -393,7 +393,7 @@ export default function AnnouncementsPage() {
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
                           fontSize: '13px',
-                          color: '#A89880',
+                          color: '#1C1917',
                           margin: '0 0 8px 0',
                           lineHeight: 1.5,
                         }}

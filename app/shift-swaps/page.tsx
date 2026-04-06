@@ -278,7 +278,7 @@ export default function ShiftSwapsPage() {
   if (loading) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           Loading...
         </div>
       </main>
@@ -288,7 +288,7 @@ export default function ShiftSwapsPage() {
   if (!user) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           Not authenticated
         </div>
       </main>
@@ -312,7 +312,7 @@ export default function ShiftSwapsPage() {
                 fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                 fontSize: '13px',
                 fontWeight: 500,
-                color: '#78716C',
+                color: '#1C1917',
                 textDecoration: 'none',
               }}
               className="hover:opacity-80 transition-opacity"
@@ -369,7 +369,7 @@ export default function ShiftSwapsPage() {
             <form onSubmit={handleCreateShiftSwap}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginBottom: '20px' }}>
                 <div>
-                  <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#A89880', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#1C1917', marginBottom: '8px' }}>
                     Shift date
                   </label>
                   <input
@@ -392,7 +392,7 @@ export default function ShiftSwapsPage() {
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#A89880', marginBottom: '8px' }}>
+                  <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#1C1917', marginBottom: '8px' }}>
                     Shift time
                   </label>
                   <input
@@ -417,7 +417,7 @@ export default function ShiftSwapsPage() {
                 </div>
               </div>
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#A89880', marginBottom: '8px' }}>
+                <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#1C1917', marginBottom: '8px' }}>
                   Notes (optional)
                 </label>
                 <textarea
@@ -471,7 +471,7 @@ export default function ShiftSwapsPage() {
                     <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#1C1917', margin: 0 }}>
                       {new Date(shift.shift_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} at {shift.shift_time}
                     </h3>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '4px 0 0 0' }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#1C1917', margin: '4px 0 0 0' }}>
                       Requested by <strong>{shift.requester_name}</strong>
                     </p>
                   </div>
@@ -493,13 +493,13 @@ export default function ShiftSwapsPage() {
                 </div>
 
                 {shift.notes && (
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '12px 0', lineHeight: 1.6 }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#1C1917', margin: '12px 0', lineHeight: 1.6 }}>
                     <strong>Notes:</strong> {shift.notes}
                   </p>
                 )}
 
                 {shift.status === 'claimed' && shift.claimer_name && (
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '12px 0 0 0' }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#1C1917', margin: '12px 0 0 0' }}>
                     <strong>Claimed by:</strong> {shift.claimer_name}
                   </p>
                 )}
@@ -581,7 +581,7 @@ export default function ShiftSwapsPage() {
                         fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                         fontSize: '12px',
                         fontWeight: 500,
-                        color: '#6B5B4E',
+                        color: '#1C1917',
                         background: 'transparent',
                         border: '1px solid rgba(255,255,255,0.1)',
                         borderRadius: '4px',
@@ -607,7 +607,7 @@ export default function ShiftSwapsPage() {
               textAlign: 'center',
             }}
           >
-            <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', color: '#6B5B4E', margin: 0 }}>
+            <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', color: '#1C1917', margin: 0 }}>
               No shift swaps yet. Request one to get started.
             </p>
           </div>

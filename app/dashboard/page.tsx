@@ -171,7 +171,7 @@ export default function Dashboard() {
   if (loading || redirecting) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 300 }}>
+        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 300 }}>
           {redirecting ? 'Redirecting to login...' : 'Loading dashboard...'}
         </div>
       </main>
@@ -185,7 +185,7 @@ export default function Dashboard() {
           <h1 style={{ color: '#1C1917', fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '24px', marginBottom: '16px' }}>
             Error loading dashboard
           </h1>
-          <p style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', marginBottom: '24px' }}>
+          <p style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', marginBottom: '24px' }}>
             {error}
           </p>
           <button
@@ -213,7 +213,7 @@ export default function Dashboard() {
   if (!user || !org) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           No organization found. Please contact support.
         </div>
       </main>
@@ -229,7 +229,7 @@ export default function Dashboard() {
             <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
               {org.name}
             </h1>
-            <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#6B5B4E', margin: '4px 0 0 0' }}>
+            <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#1C1917', margin: '4px 0 0 0' }}>
               Staff Communications
             </p>
           </div>
@@ -238,7 +238,7 @@ export default function Dashboard() {
               <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#F5F0E8', margin: 0 }}>
                 {user.name}
               </p>
-              <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '4px 0 0 0' }}>
+              <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '4px 0 0 0' }}>
                 {user.role}
               </p>
             </div>
@@ -248,7 +248,7 @@ export default function Dashboard() {
                 fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                 fontSize: '13px',
                 fontWeight: 500,
-                color: '#78716C',
+                color: '#1C1917',
                 background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.1)',
                 borderRadius: '4px',
@@ -287,7 +287,7 @@ export default function Dashboard() {
               fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
               fontSize: '13px',
               fontWeight: 500,
-              color: '#6B5B4E',
+              color: '#1C1917',
               borderBottom: '2px solid transparent',
               padding: '16px 0',
               textDecoration: 'none',
@@ -378,10 +378,10 @@ export default function Dashboard() {
                     <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#1C1917', margin: '0 0 8px 0' }}>
                       {announcement.title}
                     </h3>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 300, color: '#A89880', margin: 0, lineHeight: 1.6 }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 300, color: '#1C1917', margin: 0, lineHeight: 1.6 }}>
                       {announcement.body}
                     </p>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '12px 0 0 0' }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '12px 0 0 0' }}>
                       {new Date(announcement.created_at).toLocaleDateString()}
                     </p>
                   </div>
@@ -398,7 +398,7 @@ export default function Dashboard() {
                   boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                 }}
               >
-                <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', color: '#6B5B4E', margin: 0 }}>
+                <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', color: '#1C1917', margin: 0 }}>
                   No announcements yet
                 </p>
               </div>
@@ -430,7 +430,7 @@ export default function Dashboard() {
                           <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#F5F0E8', margin: 0 }}>
                             {member.name}
                           </p>
-                          <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '2px 0 0 0' }}>
+                          <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '2px 0 0 0' }}>
                             {member.role}
                           </p>
                         </div>
@@ -439,7 +439,7 @@ export default function Dashboard() {
                   </div>
                 ) : (
                   <div style={{ padding: '16px', textAlign: 'center' }}>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#6B5B4E', margin: 0 }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#1C1917', margin: 0 }}>
                       No team members yet
                     </p>
                   </div>
@@ -455,7 +455,7 @@ export default function Dashboard() {
               <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', marginBottom: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
                   <div>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                       Open
                     </p>
                     <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '18px', fontWeight: 600, color: '#D97706', margin: 0 }}>
@@ -463,7 +463,7 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                       Pending
                     </p>
                     <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '18px', fontWeight: 600, color: '#3B82F6', margin: 0 }}>
@@ -497,7 +497,7 @@ export default function Dashboard() {
               </h3>
               <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
                 <div style={{ marginBottom: '12px' }}>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                     Plan
                   </p>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: '#F5F0E8', margin: 0 }}>
@@ -505,7 +505,7 @@ export default function Dashboard() {
                   </p>
                 </div>
                 <div>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#6B5B4E', margin: '0 0 4px 0' }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                     Status
                   </p>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: org.subscription_status === 'trial' || !org.subscription_status ? '#D97706' : '#10B981', margin: 0 }}>
