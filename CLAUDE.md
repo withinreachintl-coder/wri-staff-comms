@@ -1,49 +1,62 @@
 # Design & Code Standards for Staff Communications
 
-## Text Color Rules
+## Text Color Rules (Critical!)
 
-### Cream Background (#FAFAF9) - Critical Rule
+### The Master Rule
+**Light backgrounds = Dark text. Dark backgrounds = Light text.**
 
-**Never use light gray or muted text colors on the cream (#FAFAF9) background.**
+### Cream Background (#FAFAF9) - Use Dark Text
 
 All text on cream backgrounds must be:
 - ✅ **#1C1917** (dark brown) - primary text, headings, labels
 - ✅ **Darker** - anything darker than #1C1917 is acceptable
 
-**Forbidden colors on cream backgrounds:**
-- ❌ #F5F0E8 (cream/white - nearly invisible on cream bg)
-- ❌ #A89880 (light taupe)
+**Forbidden colors on cream (#FAFAF9):**
+- ❌ #F5F0E8 (cream/white - invisible)
+- ❌ #A89880 (light taupe - barely visible)
 - ❌ #78716C (muted gray)
 - ❌ #6B5B4E (medium taupe)
 - ❌ rgba(255,255,255,x) - any light/white with opacity
 
-### Why This Matters
-
-The cream background (#FAFAF9) is nearly white. Light gray text on it has poor contrast and is hard to read. This rule applies to:
+**Applies to:**
 - Section labels ("Announcements", "Team", "Shift Swaps", "Account")
-- Descriptive text
-- Helper text
+- Section headings (h2, h3 elements)
+- Descriptive and helper text
 - Subtext and captions
 - Trial countdown text
+- All dashboard interior page text
 
-### Exception: Dark Backgrounds
+### Dark Background (#1C1917, #141210) - Use Light Text
 
-On dark backgrounds (#1C1917, #141210), light text is always acceptable:
-- #F5F0E8 (cream text on dark)
-- #A89880 (light taupe on dark)
-- Any lighter color works on dark
+All text on dark backgrounds must be:
+- ✅ **#F5F0E8** (cream/white) - primary text, headings
+- ✅ **#A89880** (light taupe) - secondary/muted text
+- ✅ **Lighter** - anything lighter than #1C1917
+
+**Applies to:**
+- Navigation headers (org name, user name, role)
+- Sign out button and nav links
+- Tab labels (Announcements, Shift Swaps, etc.)
+- Any text inside dark-background containers
+- Nav/header elements
+
+### Why This Matters
+
+- Cream (#FAFAF9) is nearly white — light colors vanish on it
+- Dark (#1C1917) is nearly black — dark colors vanish on it
+- Good contrast = readable. Poor contrast = invisible
 
 ## Color Palette
 
 **Text Colors:**
-- Primary/Headings on cream: #1C1917
-- Secondary on cream: #1C1917 (same)
-- Primary on dark: #F5F0E8
-- Secondary on dark: #A89880
+- On cream (#FAFAF9): #1C1917 (dark brown)
+- On dark (#1C1917): #F5F0E8 (cream/white)
+- Secondary on dark: #A89880 (light taupe)
 
 **Background Colors:**
 - Interior/dashboard: #FAFAF9 (cream)
-- Landing/dark: #1C1917, #141210
+- Navigation/headers: #1C1917 (dark)
+- Landing sections: #1C1917, #141210 (dark)
 
 ## Implementation Checklist
 
