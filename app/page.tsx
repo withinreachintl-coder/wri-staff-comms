@@ -131,7 +131,7 @@ export default function Home() {
               color: '#F5F0E8',
             }}
           >
-            Everything your team needs, nothing it doesn't
+            Everything your team needs, nothing it doesn&apos;t
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
