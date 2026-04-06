@@ -139,9 +139,10 @@ export default function Home() {
             <div
               className="p-6"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: '#FFFFFF',
+                border: '1px solid #E5E0D8',
                 borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
               }}
             >
               <div
@@ -162,7 +163,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 500,
-                  color: '#F5F0E8',
+                  color: '#1C1917',
                 }}
               >
                 Announcements
@@ -172,7 +173,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 300,
-                  color: '#A89880',
+                  color: '#6B5B4E',
                 }}
               >
                 Broadcast updates to your entire team or specific roles.
@@ -184,9 +185,10 @@ export default function Home() {
             <div
               className="p-6"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: '#FFFFFF',
+                border: '1px solid #E5E0D8',
                 borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
               }}
             >
               <div
@@ -206,7 +208,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 500,
-                  color: '#F5F0E8',
+                  color: '#1C1917',
                 }}
               >
                 Shift Swaps
@@ -216,7 +218,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 300,
-                  color: '#A89880',
+                  color: '#6B5B4E',
                 }}
               >
                 Staff request a swap, teammates claim it, manager approves.
@@ -228,9 +230,10 @@ export default function Home() {
             <div
               className="p-6"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: '#FFFFFF',
+                border: '1px solid #E5E0D8',
                 borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
               }}
             >
               <div
@@ -251,7 +254,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 500,
-                  color: '#F5F0E8',
+                  color: '#1C1917',
                 }}
               >
                 Read Receipts
@@ -261,7 +264,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontWeight: 300,
-                  color: '#A89880',
+                  color: '#6B5B4E',
                 }}
               >
                 See who opened your announcement and when.
@@ -390,9 +393,10 @@ export default function Home() {
           <div
             className="p-8"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: '#FFFFFF',
+              border: '1px solid #E5E0D8',
               borderRadius: '8px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
             }}
           >
             <div className="flex items-baseline justify-center gap-1 mb-2">
@@ -401,7 +405,7 @@ export default function Home() {
                 style={{
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 700,
-                  color: '#F5F0E8',
+                  color: '#1C1917',
                 }}
               >
                 $29
@@ -422,7 +426,7 @@ export default function Home() {
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontWeight: 400,
-                color: '#A89880',
+                color: '#6B5B4E',
               }}
             >
               14-day free trial — no credit card required
@@ -445,7 +449,7 @@ export default function Home() {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontWeight: 400,
-                      color: '#F5F0E8',
+                      color: '#1C1917',
                     }}
                   >
                     {feature}
