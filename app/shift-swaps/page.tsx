@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
+import Card from '../components/Card'
 
 type User = {
   id: string
@@ -464,21 +465,13 @@ export default function ShiftSwapsPage() {
         {shifts.length > 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {shifts.map((shift) => (
-              <div
-                key={shift.id}
-                style={{
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '8px',
-                  padding: '20px',
-                }}
-              >
+              <Card key={shift.id}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '12px' }}>
                   <div>
-                    <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#F5F0E8', margin: 0 }}>
+                    <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#1C1917', margin: 0 }}>
                       {new Date(shift.shift_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })} at {shift.shift_time}
                     </h3>
-                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#A89880', margin: '4px 0 0 0' }}>
+                    <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '4px 0 0 0' }}>
                       Requested by <strong>{shift.requester_name}</strong>
                     </p>
                   </div>
@@ -486,10 +479,11 @@ export default function ShiftSwapsPage() {
                     style={{
                       fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                       fontSize: '11px',
-                      fontWeight: 500,
+                      fontWeight: 600,
                       color: shift.status === 'open' ? '#D97706' : shift.status === 'claimed' ? '#3B82F6' : shift.status === 'approved' ? '#10B981' : '#6B5B4E',
-                      background: shift.status === 'open' ? 'rgba(217,119,6,0.15)' : shift.status === 'claimed' ? 'rgba(59,130,246,0.15)' : shift.status === 'approved' ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.05)',
-                      padding: '4px 12px',
+                      background: shift.status === 'open' ? '#FEF3C7' : shift.status === 'claimed' ? '#DBEAFE' : shift.status === 'approved' ? '#D1FAE5' : '#F3F0ED',
+                      border: shift.status === 'open' ? '1px solid #D97706' : shift.status === 'claimed' ? '1px solid #3B82F6' : shift.status === 'approved' ? '1px solid #10B981' : '1px solid #D5CCBF',
+                      padding: '6px 12px',
                       borderRadius: '4px',
                       textTransform: 'capitalize',
                     }}
@@ -499,13 +493,13 @@ export default function ShiftSwapsPage() {
                 </div>
 
                 {shift.notes && (
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#A89880', margin: '12px 0', lineHeight: 1.6 }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '12px 0', lineHeight: 1.6 }}>
                     <strong>Notes:</strong> {shift.notes}
                   </p>
                 )}
 
                 {shift.status === 'claimed' && shift.claimer_name && (
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#A89880', margin: '12px 0 0 0' }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#6B5B4E', margin: '12px 0 0 0' }}>
                     <strong>Claimed by:</strong> {shift.claimer_name}
                   </p>
                 )}
@@ -600,7 +594,7 @@ export default function ShiftSwapsPage() {
                     </button>
                   )}
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         ) : (

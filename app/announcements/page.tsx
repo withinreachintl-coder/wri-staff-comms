@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
+import Card from '../components/Card'
 
 interface User {
   id: string
@@ -309,25 +310,18 @@ export default function AnnouncementsPage() {
 
         {/* Announcements List */}
         {announcements.length === 0 ? (
-          <div
-            style={{
-              padding: '48px 24px',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              borderRadius: '8px',
-              textAlign: 'center',
-            }}
-          >
+          <Card padding="48px 24px">
             <p
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '14px',
-                color: '#A89880',
+                color: '#6B5B4E',
+                textAlign: 'center',
               }}
             >
               No announcements yet
             </p>
-          </div>
+          </Card>
         ) : (
           <div className="space-y-3">
             {announcements.map((announcement) => {
