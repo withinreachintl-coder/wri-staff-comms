@@ -226,7 +226,7 @@ export default function Dashboard() {
       <header style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
-            <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
+            <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#1C1917', margin: 0 }}>
               {org.name}
             </h1>
             <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#1C1917', margin: '4px 0 0 0' }}>
@@ -235,7 +235,7 @@ export default function Dashboard() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ textAlign: 'right' }}>
-              <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#F5F0E8', margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', color: '#1C1917', margin: 0 }}>
                 {user.name}
               </p>
               <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '4px 0 0 0' }}>
@@ -272,7 +272,7 @@ export default function Dashboard() {
               fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
               fontSize: '13px',
               fontWeight: 500,
-              color: '#F5F0E8',
+              color: '#1C1917',
               borderBottom: '2px solid #D97706',
               padding: '16px 0',
               textDecoration: 'none',
@@ -339,7 +339,7 @@ export default function Dashboard() {
           {/* Announcements section */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-              <h2 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
+              <h2 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#1C1917', margin: 0 }}>
                 Announcements
               </h2>
               {(user.role === 'admin' || user.role === 'manager') && (
@@ -409,7 +409,7 @@ export default function Dashboard() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             {/* Team members */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
+              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#1C1917', margin: '0 0 16px 0' }}>
                 Team ({teamMembers.length})
               </h3>
               <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', overflow: 'hidden' }}>
@@ -427,7 +427,7 @@ export default function Dashboard() {
                         }}
                       >
                         <div>
-                          <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#F5F0E8', margin: 0 }}>
+                          <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#1C1917', margin: 0 }}>
                             {member.name}
                           </p>
                           <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '2px 0 0 0' }}>
@@ -449,7 +449,7 @@ export default function Dashboard() {
 
             {/* Shift swaps quick stats */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
+              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#1C1917', margin: '0 0 16px 0' }}>
                 Shift Swaps
               </h3>
               <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', marginBottom: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
@@ -492,7 +492,7 @@ export default function Dashboard() {
 
             {/* Account info */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#F5F0E8', margin: '0 0 16px 0' }}>
+              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#1C1917', margin: '0 0 16px 0' }}>
                 Account
               </h3>
               <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
@@ -500,7 +500,7 @@ export default function Dashboard() {
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                     Plan
                   </p>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: '#F5F0E8', margin: 0 }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: '#1C1917', margin: 0 }}>
                     {org.subscription_status === 'trial' || !org.subscription_status ? 'Free Trial' : 'Pro'}
                   </p>
                 </div>

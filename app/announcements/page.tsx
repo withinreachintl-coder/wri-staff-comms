@@ -180,7 +180,7 @@ export default function AnnouncementsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#1C1917' }}>
-        <p style={{ color: '#F5F0E8', fontFamily: "'DM Sans', sans-serif" }}>Loading...</p>
+        <p style={{ color: '#1C1917', fontFamily: "'DM Sans', sans-serif" }}>Loading...</p>
       </div>
     )
   }
@@ -188,7 +188,7 @@ export default function AnnouncementsPage() {
   if (!user || !org) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#1C1917' }}>
-        <p style={{ color: '#F5F0E8' }}>Unauthorized access</p>
+        <p style={{ color: '#1C1917' }}>Unauthorized access</p>
       </div>
     )
   }
@@ -227,7 +227,7 @@ export default function AnnouncementsPage() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: '18px',
                 fontWeight: 600,
-                color: '#F5F0E8',
+                color: '#1C1917',
               }}
             >
               {org.name}
@@ -269,7 +269,7 @@ export default function AnnouncementsPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: '32px',
               fontWeight: 700,
-              color: '#F5F0E8',
+              color: '#1C1917',
               marginBottom: '8px',
             }}
           >
@@ -383,7 +383,7 @@ export default function AnnouncementsPage() {
                           fontFamily: "'DM Sans', sans-serif",
                           fontSize: '15px',
                           fontWeight: 500,
-                          color: '#F5F0E8',
+                          color: '#1C1917',
                           margin: '0 0 8px 0',
                         }}
                       >
