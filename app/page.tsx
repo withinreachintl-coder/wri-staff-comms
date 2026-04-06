@@ -146,12 +146,17 @@ export default function Home() {
               }}
             >
               <div
-                className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
+                  width: '40px',
+                  height: '40px',
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
                   fontSize: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '16px',
                 }}
               >
                 📢
@@ -190,12 +195,17 @@ export default function Home() {
               }}
             >
               <div
-                className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
+                  width: '40px',
+                  height: '40px',
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
                   fontSize: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '16px',
                 }}
               >
                 🔄
@@ -234,12 +244,17 @@ export default function Home() {
               }}
             >
               <div
-                className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
+                  width: '40px',
+                  height: '40px',
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
                   fontSize: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '16px',
                 }}
               >
                 ✓
