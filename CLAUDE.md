@@ -1,169 +1,53 @@
-# WRI Daily Ops Checklist — Claude Code Instructions
+# Design & Code Standards for Staff Communications
 
-> Read this file at the start of every session before touching any code.
+## Text Color Rules
 
----
+### Cream Background (#FAFAF9) - Critical Rule
 
-## Project Overview
+**Never use light gray or muted text colors on the cream (#FAFAF9) background.**
 
-- **Product:** Staff Communication Tool — restaurant team coordination SaaS
-- **URL:** https://staff.wireach.tools
-- **Repo:** withinreachintl-coder/wri-staff-comms (branch: main)
-- **Stack:** Next.js 14.1.0, Supabase, Tailwind CSS, TypeScript, Vercel
-- **Stripe:** $29/mo, 14-day free trial
-- **Target user:** Independent restaurant owners replacing WhatsApp group chats
----
+All text on cream backgrounds must be:
+- ✅ **#1C1917** (dark brown) - primary text, headings, labels
+- ✅ **Darker** - anything darker than #1C1917 is acceptable
 
-## Design Direction — Non-Negotiable
+**Forbidden colors on cream backgrounds:**
+- ❌ #A89880 (light taupe)
+- ❌ #78716C (muted gray)
+- ❌ #6B5B4E (medium taupe)
+- ❌ rgba(255,255,255,x) - any light/white with opacity
 
-This product serves busy restaurant operators. Every design decision must feel
-like it belongs in a well-run kitchen: dark, confident, warm, professional.
-Nothing generic. Nothing that looks like it came from an AI template.
+### Why This Matters
 
-### Aesthetic: Warm Utilitarian
+The cream background (#FAFAF9) is nearly white. Light gray text on it has poor contrast and is hard to read. This rule applies to:
+- Section labels ("Announcements", "Team", "Shift Swaps", "Account")
+- Descriptive text
+- Helper text
+- Subtext and captions
+- Trial countdown text
 
-Think: cast iron, amber light, chalkboard menus, a kitchen that means business.
-- Dark backgrounds (#1C1917 primary, #141210 deep)
-- Amber accent (#D97706) — used sparingly, never overused
-- Warm off-white text (#F5F0E8) — never pure white
-- Muted warm grays for secondary text (#A89880, #6B5B4E)
+### Exception: Dark Backgrounds
 
-### Typography Rules
+On dark backgrounds (#1C1917, #141210), light text is always acceptable:
+- #F5F0E8 (cream text on dark)
+- #A89880 (light taupe on dark)
+- Any lighter color works on dark
 
-- **Display / Headings:** Playfair Display (serif) — import from Google Fonts
-- **Body / UI:** DM Sans — import from Google Fonts
-- NEVER use: Inter, Roboto, Arial, system-ui as the primary font
-- NEVER use: generic sans-serif stacks for headings
-- Heading weight: 700 for hero, 500 for section heads
-- Body weight: 300 for paragraphs, 400 for UI labels, 500 for emphasis
+## Color Palette
 
-### Color System
+**Text Colors:**
+- Primary/Headings on cream: #1C1917
+- Secondary on cream: #1C1917 (same)
+- Primary on dark: #F5F0E8
+- Secondary on dark: #A89880
 
-```css
---color-bg-primary: #1C1917;
---color-bg-deep: #141210;
---color-bg-surface: #FAFAF9;
---color-bg-card-dark: rgba(255,255,255,0.04);
---color-accent: #D97706;
---color-accent-hover: #B45309;
---color-accent-muted: rgba(217,119,6,0.15);
---color-text-primary-dark: #F5F0E8;
---color-text-secondary-dark: #A89880;
---color-text-muted-dark: #6B5B4E;
---color-text-primary-light: #1C1917;
---color-text-secondary-light: #78716C;
---color-border-dark: rgba(255,255,255,0.08);
---color-border-light: #E8E3DC;
-```
+**Background Colors:**
+- Interior/dashboard: #FAFAF9 (cream)
+- Landing/dark: #1C1917, #141210
 
-### Component Rules
+## Implementation Checklist
 
-- Border radius: 4px for buttons/badges, 8px for cards and containers
-- Borders: 1px solid with low-opacity — never heavy outlines
-- No drop shadows — use border and background contrast instead
-- No purple gradients — ever
-- No blue primary buttons — amber only for primary CTAs
-- Checkboxes: amber fill when checked (#D97706), dark border when open
-
-### Buttons
-
-```css
-/* Primary */
-background: #D97706; color: #1C1917; border-radius: 4px; font-weight: 500;
-
-/* Ghost / Secondary */
-background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #F5F0E8;
-```
-
----
-
-## Code Rules
-
-### TypeScript
-- Always handle null explicitly with ternary operators — NOT short-circuit evaluation
-- Example: `disabled={itemLimit ? !itemLimit.canAdd : false}`
-- Never use `!` non-null assertions on values that could realistically be null
-
-### Supabase
-- Always get org_id from the authenticated user session — never hardcode UUIDs
-- Pattern: `supabase.auth.getUser()` → look up org from users/organizations table
-- Table for checklist tasks: `checklist_items` (NOT `checklist_tasks`)
-- RLS: debug in SQL editor, not the Supabase UI policy builder
-
-### Next.js 14.1.0
-- Auth: use `@supabase/ssr` — NOT the deprecated `@supabase/auth-helpers-nextjs`
-- Supabase client: always import from `@/lib/supabase`
-- Every page must have a root layout (`app/layout.tsx`)
-
-### Before Every Push
-1. Audit ALL imports across all files in `app/` — confirm every module exists
-2. Check `package.json` has every dependency that is imported
-3. Run `npm run build` locally and confirm it passes before pushing
-4. Never push a build you haven't verified locally
-
----
-
-## Security Rules — Non-Negotiable
-
-### API Keys & Secrets
-- NEVER put real API keys in `.env.example` — placeholders only
-- Example: `RESEND_API_KEY=your_resend_api_key_here`
-- Real keys go in `.env.local` only — this file is in `.gitignore` and never commits
-- If you accidentally commit a real key, tell Keon immediately so it can be revoked
-- Before every push, visually confirm `.env.example` contains no real key values
-
-### node_modules
-- NEVER commit `node_modules` to git — ever
-- Before the first `git add .` on any repo, confirm `node_modules/` is in `.gitignore`
-- Run `git status` before `git add .` and check what files are staged
-- If node_modules appears in `git status`, stop and add it to `.gitignore` first
-
-### Verified incidents (March 2026)
-- Resend API key was committed to `.env.example` in wri-restaurant-ops — key revoked, new key issued
-- node_modules committed in wri-staff-comms first push — required `filter-branch` to clean history
-
----
-
-## Database Tables (Supabase — wri-restaurant-ops)
-
-| Table | Purpose |
-|---|---|
-| `checklist_items` | Checklist task items (use this one) |
-| `checklists` | Opening/closing checklist records |
-| `organizations` | Org records |
-| `users` | User profiles |
-| `checklist_completions` | Completion tracking |
-
----
-
-## Current Bugs (fix in priority order)
-
-1. **Add Item / Delete** — org_id is hardcoded. Must pull from real auth session.
-2. **Photo upload** — button exists but file input not properly wired.
-3. **Stripe billing page** — in-app upgrade flow not built yet.
-
----
-
-## Environment Variables (already set in Vercel — do not re-add)
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `RESEND_API_KEY`
-- `STRIPE_SECRET_KEY`
-
----
-
-## Deployment
-
-- Vercel auto-deploys on every push to `main`
-- Check vercel.com after pushing to confirm a build triggered
-- If no new build appears within 60 seconds, the push likely went to the wrong branch
-
----
-
-## What Success Looks Like
-
-Every screen should make a restaurant owner think:
-*"This was built by someone who understands my operation."*
-
-Not: *"This looks like another generic SaaS tool."*
+Before pushing any changes:
+1. ✅ Verify all text on cream backgrounds is #1C1917 or darker
+2. ✅ Verify all text on dark backgrounds is light
+3. ✅ Run `npm run build` locally
+4. ✅ Visually verify contrast in browser
