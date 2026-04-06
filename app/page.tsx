@@ -1,429 +1,420 @@
-export default function Home() {
+import Link from 'next/link'
+
+export default function LandingPage() {
   return (
-    <div className="min-h-screen" style={{ background: '#141210' }}>
+    <main className="min-h-screen" style={{ background: '#1C1917', color: '#F5F0E8' }}>
       {/* Nav */}
-      <nav
-        className="border-b"
-        style={{
-          background: '#1C1917',
-          borderColor: 'rgba(255,255,255,0.08)',
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div
-              style={{
-                width: '32px',
-                height: '32px',
-                background: 'rgba(217,119,6,0.15)',
-                border: '1px solid rgba(217,119,6,0.3)',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#D97706',
-                fontSize: '16px',
-                fontWeight: 700,
-              }}
-            >
-              &#10003;
-            </div>
-            <span
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: '18px',
-                fontWeight: 600,
-                letterSpacing: '-0.01em',
-                color: '#F5F0E8',
-              }}
-            >
-              Staff Comms
-            </span>
-          </div>
-          <a
-            href="/login"
-            className="text-sm font-medium px-5 py-2"
+      <nav className="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <div
             style={{
-              background: '#D97706',
-              color: '#1C1917',
+              width: '32px',
+              height: '32px',
+              background: 'rgba(217,119,6,0.15)',
+              border: '1px solid rgba(217,119,6,0.3)',
               borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#D97706',
+              fontSize: '16px',
+              fontWeight: 700,
             }}
           >
-            Start Free Trial
-          </a>
+            &#10003;
+          </div>
+          <span
+            style={{
+              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+              fontSize: '18px',
+              fontWeight: 600,
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Staff Comms
+          </span>
+        </div>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/help"
+            className="hidden sm:inline hover:opacity-80 transition-opacity"
+            style={{
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '14px',
+              fontWeight: 400,
+              color: '#A89880',
+              textDecoration: 'none',
+            }}
+          >
+            How It Works
+          </Link>
+          <Link
+            href="/login"
+            className="hover:opacity-80 transition-opacity"
+            style={{
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '14px',
+              fontWeight: 500,
+              color: '#F5F0E8',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '4px',
+              padding: '8px 20px',
+              textDecoration: 'none',
+            }}
+          >
+            Log In
+          </Link>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="pt-24 pb-20 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6"
+      <section className="max-w-5xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
+        <div className="max-w-3xl">
+          <p
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 700,
-              color: '#F5F0E8',
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#D97706',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase' as const,
+              marginBottom: '20px',
             }}
           >
-            Your team deserves better
-            <br />
-            than a WhatsApp group chat
+            For independent restaurants
+          </p>
+          <h1
+            style={{
+              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+              fontWeight: 700,
+              lineHeight: 1.1,
+              marginBottom: '24px',
+            }}
+          >
+            Your team deserves<br />
+            better than<br />
+            <span style={{ color: '#D97706' }}>a WhatsApp group chat.</span>
           </h1>
           <p
-            className="text-lg md:text-xl mb-10 max-w-2xl mx-auto"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '18px',
               fontWeight: 300,
-              color: '#A89880',
               lineHeight: 1.7,
+              color: '#A89880',
+              maxWidth: '520px',
+              marginBottom: '40px',
             }}
           >
-            Announcements get buried. Shift swaps fall through the cracks.
-            Staff Comms gives your restaurant team one clear place to coordinate
-            — with read receipts so you know who saw what.
+            Announcements get buried. Shift swaps fall through the cracks. Staff Comms
+            gives your restaurant team one clear place to coordinate — with read receipts
+            so you know who saw what.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+          <div className="flex flex-wrap items-center gap-4">
+            <Link
               href="/login"
-              className="text-base font-medium px-8 py-3 block text-center sm:inline-block"
+              className="hover:opacity-90 transition-opacity"
               style={{
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                 background: '#D97706',
                 color: '#1C1917',
-                borderRadius: '4px',
-                fontFamily: "'DM Sans', sans-serif",
+                fontSize: '15px',
                 fontWeight: 500,
+                padding: '14px 32px',
+                borderRadius: '4px',
+                textDecoration: 'none',
+                display: 'inline-block',
               }}
             >
               Start 14-Day Free Trial
-            </a>
-            <a
-              href="#features"
-              className="text-base px-8 py-3 block text-center sm:inline-block"
+            </Link>
+            <span
               style={{
-                background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.2)',
-                color: '#F5F0E8',
-                borderRadius: '4px',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '13px',
                 fontWeight: 400,
+                color: '#6B5B4E',
               }}
             >
-              See How It Works
-            </a>
+              No credit card required &middot; $29/mo after trial
+            </span>
           </div>
-          <p
-            className="mt-5 text-sm"
-            style={{ color: '#6B5B4E', fontFamily: "'DM Sans', sans-serif" }}
-          >
-            No credit card required
-          </p>
         </div>
       </section>
+
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
+      </div>
 
       {/* Features */}
-      <section id="features" className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="text-2xl md:text-3xl text-center mb-16"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 500,
-              color: '#F5F0E8',
-            }}
-          >
-            Everything your team needs, nothing it doesn&apos;t
-          </h2>
+      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+        <p
+          style={{
+            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+            fontSize: '13px',
+            fontWeight: 500,
+            color: '#6B5B4E',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase' as const,
+            marginBottom: '12px',
+          }}
+        >
+          What you get
+        </p>
+        <h2
+          style={{
+            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
+            fontWeight: 500,
+            marginBottom: '48px',
+          }}
+        >
+          Everything your team needs. Nothing it doesn&apos;t.
+        </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Announcements */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" />
+                </svg>
+              ),
+              label: 'Announcements',
+              body: 'Broadcast updates to your entire team or specific roles. No more "did you see my message?" — you\'ll know exactly who read it.',
+            },
+            {
+              icon: (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" /><path d="M12 6v6l4 2" />
+                </svg>
+              ),
+              label: 'Shift Swaps',
+              body: 'Staff request a swap, teammates claim it, manager approves. Clean, traceable, no more screenshot negotiations.',
+            },
+            {
+              icon: (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" />
+                </svg>
+              ),
+              label: 'Read Receipts',
+              body: 'See who opened your announcement and when. Follow up with the three people who missed it — not the whole team.',
+            },
+          ].map((feature, i) => (
             <div
-              className="p-6"
+              key={i}
               style={{
-                background: '#FFFFFF',
-                border: '1px solid #E5E0D8',
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '8px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                padding: '32px 28px',
+                transition: 'border-color 0.25s ease',
               }}
+              className="hover:!border-[rgba(217,119,6,0.15)]"
             >
               <div
                 style={{
                   width: '40px',
                   height: '40px',
-                  background: '#FEF3C7',
-                  border: '1px solid #D97706',
+                  background: 'rgba(217,119,6,0.1)',
+                  border: '1px solid rgba(217,119,6,0.2)',
                   borderRadius: '4px',
-                  fontSize: '20px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '16px',
+                  marginBottom: '20px',
                 }}
               >
-                📢
+                {feature.icon}
               </div>
               <h3
-                className="text-base mb-2"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+                  fontSize: '18px',
                   fontWeight: 500,
-                  color: '#1C1917',
+                  marginBottom: '12px',
                 }}
               >
-                Announcements
+                {feature.label}
               </h3>
               <p
-                className="text-sm leading-relaxed"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                  fontSize: '14px',
                   fontWeight: 300,
-                  color: '#6B5B4E',
-                }}
-              >
-                Broadcast updates to your entire team or specific roles.
-                No more "did you see my message?" — you'll know exactly who read it.
-              </p>
-            </div>
-
-            {/* Shift Swaps */}
-            <div
-              className="p-6"
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #E5E0D8',
-                borderRadius: '8px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-              }}
-            >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#FEF3C7',
-                  border: '1px solid #D97706',
-                  borderRadius: '4px',
-                  fontSize: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '16px',
-                }}
-              >
-                🔄
-              </div>
-              <h3
-                className="text-base mb-2"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 500,
-                  color: '#1C1917',
-                }}
-              >
-                Shift Swaps
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 300,
-                  color: '#6B5B4E',
-                }}
-              >
-                Staff request a swap, teammates claim it, manager approves.
-                Clean, traceable, no more screenshot negotiations.
-              </p>
-            </div>
-
-            {/* Read Receipts */}
-            <div
-              className="p-6"
-              style={{
-                background: '#FFFFFF',
-                border: '1px solid #E5E0D8',
-                borderRadius: '8px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
-              }}
-            >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  background: '#FEF3C7',
-                  border: '1px solid #D97706',
-                  borderRadius: '4px',
-                  fontSize: '20px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '16px',
-                }}
-              >
-                ✓
-              </div>
-              <h3
-                className="text-base mb-2"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 500,
-                  color: '#1C1917',
-                }}
-              >
-                Read Receipts
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 300,
-                  color: '#6B5B4E',
-                }}
-              >
-                See who opened your announcement and when.
-                Follow up with the three people who missed it — not the whole team.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pain Point Section */}
-      <section className="py-20 px-6" style={{ background: '#1C1917' }}>
-        <div className="max-w-3xl mx-auto text-center">
-          <h2
-            className="text-2xl md:text-3xl mb-6"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 500,
-              color: '#F5F0E8',
-            }}
-          >
-            Built for restaurants, not office workers
-          </h2>
-          <p
-            className="text-base mb-12"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 300,
-              color: '#A89880',
-              lineHeight: 1.7,
-            }}
-          >
-            Your team checks their phone between rushes, not between meetings.
-            Staff Comms is designed for the pace of a kitchen — fast to read,
-            impossible to miss.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-6 text-left">
-            <div
-              className="p-5"
-              style={{
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '8px',
-              }}
-            >
-              <p
-                className="text-sm mb-1"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 500,
-                  color: '#D97706',
-                }}
-              >
-                Before
-              </p>
-              <p
-                className="text-sm"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 300,
+                  lineHeight: 1.7,
                   color: '#A89880',
                 }}
               >
-                "Did anyone see my message about Saturday's schedule change?
-                Can someone scroll up and find it?"
+                {feature.body}
               </p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
+      </div>
+
+      {/* Quote */}
+      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+        <div
+          style={{
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.06)',
+            borderRadius: '8px',
+            padding: '40px 36px',
+            position: 'relative' as const,
+            overflow: 'hidden',
+          }}
+        >
+          {/* Decorative quotation mark */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              top: '-8px',
+              left: '24px',
+              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+              fontSize: '120px',
+              fontWeight: 700,
+              lineHeight: 1,
+              color: 'rgba(217,119,6,0.08)',
+              userSelect: 'none',
+              pointerEvents: 'none',
+            }}
+          >
+            &ldquo;
+          </div>
+          <p
+            style={{
+              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
+              fontWeight: 400,
+              fontStyle: 'italic',
+              lineHeight: 1.6,
+              marginBottom: '16px',
+              position: 'relative',
+            }}
+          >
+            &ldquo;We were losing team members because they didn&apos;t see shift swap
+            requests. Now everything is crystal clear and we&apos;re actually scheduling
+            people who want to work.&rdquo;
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
             <div
-              className="p-5"
               style={{
-                border: '1px solid rgba(217,119,6,0.3)',
-                borderRadius: '8px',
-                background: 'rgba(217,119,6,0.05)',
+                width: '24px',
+                height: '1px',
+                background: 'rgba(217,119,6,0.3)',
+              }}
+            />
+            <p
+              style={{
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '13px',
+                fontWeight: 400,
+                color: '#6B5B4E',
               }}
             >
-              <p
-                className="text-sm mb-1"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 500,
-                  color: '#D97706',
-                }}
-              >
-                After
-              </p>
-              <p
-                className="text-sm"
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontWeight: 300,
-                  color: '#F5F0E8',
-                }}
-              >
-                "11 of 12 staff read the schedule update. Maria hasn't — I'll
-                text her directly."
-              </p>
-            </div>
+              Restaurant manager, frustrated with team communication gaps
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-20 px-6" style={{ background: '#141210' }}>
-        <div className="max-w-md mx-auto text-center">
-          <h2
-            className="text-2xl md:text-3xl mb-4"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 500,
-              color: '#F5F0E8',
-            }}
-          >
-            Simple pricing
-          </h2>
-          <p
-            className="text-sm mb-10"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontWeight: 300,
-              color: '#6B5B4E',
-            }}
-          >
-            One plan. Everything included.
-          </p>
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
+      </div>
 
+      {/* Pricing */}
+      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+        <p
+          style={{
+            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+            fontSize: '13px',
+            fontWeight: 500,
+            color: '#6B5B4E',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase' as const,
+            marginBottom: '12px',
+          }}
+        >
+          Pricing
+        </p>
+        <h2
+          style={{
+            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
+            fontWeight: 500,
+            marginBottom: '48px',
+          }}
+        >
+          Simple. Honest. No surprises.
+        </h2>
+
+        <div className="grid md:grid-cols-1 gap-6 max-w-2xl">
+          {/* Pro Tier */}
           <div
-            className="p-8"
             style={{
-              background: '#FFFFFF',
-              border: '1px solid #E5E0D8',
+              background: 'rgba(217,119,6,0.06)',
+              border: '1px solid rgba(217,119,6,0.2)',
               borderRadius: '8px',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+              padding: '36px 32px',
+              position: 'relative' as const,
             }}
           >
-            <div className="flex items-baseline justify-center gap-1 mb-2">
+            <div
+              style={{
+                position: 'absolute' as const,
+                top: '-12px',
+                left: '32px',
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '11px',
+                fontWeight: 500,
+                color: '#1C1917',
+                background: '#D97706',
+                padding: '4px 12px',
+                borderRadius: '4px',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase' as const,
+              }}
+            >
+              One Plan. Everything Included.
+            </div>
+            <p
+              style={{
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '12px',
+                fontWeight: 500,
+                color: '#D97706',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase' as const,
+                marginBottom: '8px',
+              }}
+            >
+              Staff Comms
+            </p>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '24px' }}>
               <span
-                className="text-4xl"
                 style={{
-                  fontFamily: "'Playfair Display', serif",
+                  fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+                  fontSize: '40px',
                   fontWeight: 700,
-                  color: '#1C1917',
                 }}
               >
                 $29
               </span>
               <span
-                className="text-sm"
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                  fontSize: '14px',
                   fontWeight: 300,
                   color: '#6B5B4E',
                 }}
@@ -431,90 +422,124 @@ export default function Home() {
                 /month
               </span>
             </div>
-            <p
-              className="text-sm mb-8"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontWeight: 400,
-                color: '#6B5B4E',
-              }}
-            >
-              14-day free trial — no credit card required
-            </p>
-
-            <ul className="text-left space-y-3 mb-8">
-              {[
-                'Unlimited announcements',
-                'Shift swap management',
-                'Read receipts on every message',
-                'Unlimited team members',
-                'Mobile-first design',
-              ].map((feature) => (
-                <li key={feature} className="flex items-center gap-3">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 8L6.5 11.5L13 5" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span
-                    className="text-sm"
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontWeight: 400,
-                      color: '#1C1917',
-                    }}
-                  >
-                    {feature}
-                  </span>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }}>
+              {['Unlimited announcements', 'Shift swap management', 'Read receipts on every message', 'Unlimited team members', 'Mobile-first design'].map((item, i) => (
+                <li
+                  key={i}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '10px',
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '14px',
+                    fontWeight: 300,
+                    color: '#A89880',
+                    marginBottom: '12px',
+                  }}
+                >
+                  <span style={{ color: '#D97706', marginTop: '2px', flexShrink: 0 }}>&#10003;</span>
+                  {item}
                 </li>
               ))}
             </ul>
-
-            <a
+            <Link
               href="/login"
-              className="block w-full text-center text-base font-medium py-3"
+              className="hover:opacity-90 transition-opacity"
               style={{
-                background: '#D97706',
-                color: '#1C1917',
-                borderRadius: '4px',
-                fontFamily: "'DM Sans', sans-serif",
+                display: 'block',
+                textAlign: 'center',
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '14px',
                 fontWeight: 500,
+                color: '#1C1917',
+                background: '#D97706',
+                borderRadius: '4px',
+                padding: '12px 24px',
+                textDecoration: 'none',
               }}
             >
               Start 14-Day Free Trial
-            </a>
+            </Link>
+            <p
+              style={{
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '12px',
+                fontWeight: 300,
+                color: '#6B5B4E',
+                marginTop: '12px',
+                textAlign: 'center',
+              }}
+            >
+              No credit card required
+            </p>
           </div>
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="max-w-5xl mx-auto px-6">
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
+      </div>
+
+      {/* Final CTA */}
+      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24 text-center">
+        <h2
+          style={{
+            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
+            fontWeight: 500,
+            marginBottom: '16px',
+          }}
+        >
+          Ready to replace WhatsApp chaos?
+        </h2>
+        <p
+          style={{
+            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+            fontSize: '16px',
+            fontWeight: 300,
+            color: '#A89880',
+            marginBottom: '32px',
+          }}
+        >
+          Start your free trial. No credit card. Cancel anytime.
+        </p>
+        <Link
+          href="/login"
+          className="hover:opacity-90 transition-opacity"
+          style={{
+            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+            background: '#D97706',
+            color: '#1C1917',
+            fontSize: '15px',
+            fontWeight: 500,
+            padding: '14px 32px',
+            borderRadius: '4px',
+            textDecoration: 'none',
+            display: 'inline-block',
+          }}
+        >
+          Start 14-Day Free Trial
+        </Link>
+      </section>
+
       {/* Footer */}
-      <footer
-        className="py-10 px-6 border-t"
-        style={{
-          background: '#1C1917',
-          borderColor: 'rgba(255,255,255,0.08)',
-        }}
-      >
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="max-w-5xl mx-auto px-6 py-10" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p
-            className="text-sm"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '13px',
               fontWeight: 300,
               color: '#6B5B4E',
             }}
           >
-            Part of the{' '}
-            <a
-              href="https://wireach.tools"
-              style={{ color: '#A89880', textDecoration: 'underline', textUnderlineOffset: '3px' }}
-            >
-              WiReach Tools
-            </a>{' '}
-            suite
+            Part of the <a href="https://wireach.tools" style={{ color: '#A89880', textDecoration: 'underline', textDecorationColor: 'rgba(217,119,6,0.3)' }}>WiReach Tools</a> suite
           </p>
           <p
-            className="text-sm"
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+              fontSize: '13px',
               fontWeight: 300,
               color: '#6B5B4E',
             }}
@@ -523,6 +548,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div>
+    </main>
   )
 }
