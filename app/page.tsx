@@ -151,13 +151,10 @@ export default function Home() {
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
+                  fontSize: '20px',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8L10 3L17 8V17H3V8Z" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M10 3V1" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round"/>
-                  <path d="M7 17V11H13V17" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                📢
               </div>
               <h3
                 className="text-base mb-2"
@@ -198,12 +195,10 @@ export default function Home() {
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
+                  fontSize: '20px',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 8H16M16 8L12 4M16 8L12 12" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M16 14H4M4 14L8 10M4 14L8 18" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                🔄
               </div>
               <h3
                 className="text-base mb-2"
@@ -244,13 +239,10 @@ export default function Home() {
                   background: '#FEF3C7',
                   border: '1px solid #D97706',
                   borderRadius: '4px',
+                  fontSize: '20px',
                 }}
               >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 10L8 14L16 6" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M1 10L5 14" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M11 6L15 10" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                ✓
               </div>
               <h3
                 className="text-base mb-2"
