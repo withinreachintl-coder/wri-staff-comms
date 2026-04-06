@@ -278,7 +278,7 @@ export default function ShiftSwapsPage() {
   if (loading) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#F5F0E8', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           Loading...
         </div>
       </main>
@@ -288,7 +288,7 @@ export default function ShiftSwapsPage() {
   if (!user) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#F5F0E8', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           Not authenticated
         </div>
       </main>
@@ -301,7 +301,7 @@ export default function ShiftSwapsPage() {
       <header style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
-            <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#1C1917', margin: 0 }}>
+            <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
               Shift Swaps
             </h1>
           </div>
@@ -312,7 +312,7 @@ export default function ShiftSwapsPage() {
                 fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                 fontSize: '13px',
                 fontWeight: 500,
-                color: '#1C1917',
+                color: '#F5F0E8',
                 textDecoration: 'none',
               }}
               className="hover:opacity-80 transition-opacity"
