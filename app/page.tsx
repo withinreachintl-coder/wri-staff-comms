@@ -85,7 +85,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/login"
-              className="text-base font-medium px-8 py-3 inline-block"
+              className="text-base font-medium px-8 py-3 block text-center sm:inline-block"
               style={{
                 background: '#D97706',
                 color: '#1C1917',
@@ -98,7 +98,7 @@ export default function Home() {
             </a>
             <a
               href="#features"
-              className="text-base px-8 py-3 inline-block"
+              className="text-base px-8 py-3 block text-center sm:inline-block"
               style={{
                 background: 'transparent',
                 border: '1px solid rgba(255,255,255,0.2)',
@@ -148,7 +148,8 @@ export default function Home() {
               <div
                 className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
-                  background: 'rgba(217,119,6,0.15)',
+                  background: '#FEF3C7',
+                  border: '1px solid #D97706',
                   borderRadius: '4px',
                 }}
               >
@@ -194,7 +195,8 @@ export default function Home() {
               <div
                 className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
-                  background: 'rgba(217,119,6,0.15)',
+                  background: '#FEF3C7',
+                  border: '1px solid #D97706',
                   borderRadius: '4px',
                 }}
               >
@@ -239,7 +241,8 @@ export default function Home() {
               <div
                 className="w-10 h-10 flex items-center justify-center mb-4"
                 style={{
-                  background: 'rgba(217,119,6,0.15)',
+                  background: '#FEF3C7',
+                  border: '1px solid #D97706',
                   borderRadius: '4px',
                 }}
               >
