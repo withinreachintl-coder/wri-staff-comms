@@ -182,7 +182,7 @@ export default function Dashboard() {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
         <div style={{ maxWidth: '600px', textAlign: 'center' }}>
-          <h1 style={{ color: '#F5F0E8', fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '24px', marginBottom: '16px' }}>
+          <h1 style={{ color: '#1C1917', fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '24px', marginBottom: '16px' }}>
             Error loading dashboard
           </h1>
           <p style={{ color: '#A89880', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', marginBottom: '24px' }}>
@@ -375,7 +375,7 @@ export default function Dashboard() {
                       boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                     }}
                   >
-                    <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#F5F0E8', margin: '0 0 8px 0' }}>
+                    <h3 style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '15px', fontWeight: 600, color: '#1C1917', margin: '0 0 8px 0' }}>
                       {announcement.title}
                     </h3>
                     <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 300, color: '#A89880', margin: 0, lineHeight: 1.6 }}>
