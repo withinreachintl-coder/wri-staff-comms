@@ -35,7 +35,7 @@ export default function LandingPage() {
           </span>
         </div>
         <div className="flex items-center gap-6">
-          <Link
+          <a
             href="/help"
             className="hidden sm:inline hover:opacity-80 transition-opacity"
             style={{
@@ -47,7 +47,7 @@ export default function LandingPage() {
             }}
           >
             How It Works
-          </Link>
+          </a>
           <Link
             href="/login"
             className="hover:opacity-80 transition-opacity"
