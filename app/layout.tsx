@@ -1,3 +1,5 @@
+import './globals.css'
+
 export const metadata = {
   title: 'WRI Staff Comms — Team Communication for Restaurants',
   description: 'Replace WhatsApp chaos with structured team communication. Announcements, shift swaps, and read receipts built for restaurant teams.',
