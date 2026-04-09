@@ -74,7 +74,7 @@ export async function POST(request: Request) {
         updated_at: new Date().toISOString(),
       })
       .eq('id', userData.org_id)
-      .select('id, name, billing_email')
+      .select('id, name, billing_email, accent_color')
       .single()
 
     if (updateError) {

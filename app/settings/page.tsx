@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
+import { useOrg } from '../../lib/OrgContext'
 
 type Organization = {
   id: string
@@ -13,6 +14,7 @@ type Organization = {
 
 export default function SettingsPage() {
   const router = useRouter()
+  const { org: contextOrg, setOrg: setContextOrg, updateOrgName, updateAccentColor } = useOrg()
   const [org, setOrg] = useState<Organization | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -117,15 +119,15 @@ export default function SettingsPage() {
 
       // Update local state
       setOrg(updatedOrg as Organization)
+      
+      // Update context for instant dashboard sync
+      updateOrgName(updatedOrg.name)
+      updateAccentColor(updatedOrg.accent_color)
+      
       setSuccess('Settings saved successfully!')
 
       // Clear success message after 3 seconds
       setTimeout(() => setSuccess(''), 3000)
-
-      // Dispatch custom event for dashboard to listen to
-      window.dispatchEvent(
-        new CustomEvent('orgNameUpdated', { detail: { name: updatedOrg.name } })
-      )
     } catch (err) {
       console.error('Error saving settings:', err)
       setError('An error occurred while saving')

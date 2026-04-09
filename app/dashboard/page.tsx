@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 import Link from 'next/link'
+import { useOrg } from '../../lib/OrgContext'
 
 type User = {
   id: string
@@ -44,8 +45,8 @@ type TeamMember = {
 
 export default function Dashboard() {
   const router = useRouter()
+  const { org: contextOrg, setOrg: setContextOrg } = useOrg()
   const [user, setUser] = useState<User | null>(null)
-  const [org, setOrg] = useState<Organization | null>(null)
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([])
   const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [shiftSwaps, setShiftSwaps] = useState<ShiftSwap[]>([])
@@ -56,18 +57,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     loadDashboard()
-  }, [])
-
-  // Listen for organization name updates from settings page
-  useEffect(() => {
-    const handleOrgNameUpdate = (event: any) => {
-      if (event.detail?.name) {
-        setOrg((prev) => prev ? { ...prev, name: event.detail.name } : null)
-      }
-    }
-
-    window.addEventListener('orgNameUpdated', handleOrgNameUpdate)
-    return () => window.removeEventListener('orgNameUpdated', handleOrgNameUpdate)
   }, [])
 
   const loadDashboard = async () => {
@@ -125,7 +114,7 @@ export default function Dashboard() {
         return
       }
 
-      setOrg(orgData)
+      setContextOrg(orgData)
 
       // Calculate trial days left
       if (orgData.subscription_status === 'trial' && orgData.trial_ends_at) {
@@ -222,7 +211,7 @@ export default function Dashboard() {
     )
   }
 
-  if (!user || !org) {
+  if (!user || !contextOrg) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
@@ -239,7 +228,7 @@ export default function Dashboard() {
         <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
-              {org.name}
+              {contextOrg?.name}
             </h1>
             <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#F5F0E8', margin: '4px 0 0 0' }}>
               Staff Communications
@@ -332,7 +321,7 @@ export default function Dashboard() {
       </div>
 
       {/* Trial banner */}
-      {org.subscription_status === 'trial' && (
+      {contextOrg?.subscription_status === 'trial' && (
         <div style={{ background: 'rgba(217,119,6,0.12)', borderBottom: '1px solid rgba(217,119,6,0.2)', padding: '16px 24px' }}>
           <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -532,15 +521,15 @@ export default function Dashboard() {
                     Plan
                   </p>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: '#1C1917', margin: 0 }}>
-                    {org.subscription_status === 'trial' || !org.subscription_status ? 'Free Trial' : 'Pro'}
+                    {contextOrg?.subscription_status === 'trial' || !contextOrg?.subscription_status ? 'Free Trial' : 'Pro'}
                   </p>
                 </div>
                 <div>
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                     Status
                   </p>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: org.subscription_status === 'trial' || !org.subscription_status ? '#D97706' : '#10B981', margin: 0 }}>
-                    {org.subscription_status === 'trial' || !org.subscription_status ? 'Trial' : 'Active'}
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 500, color: contextOrg?.subscription_status === 'trial' || !contextOrg?.subscription_status ? '#D97706' : '#10B981', margin: 0 }}>
+                    {contextOrg?.subscription_status === 'trial' || !contextOrg?.subscription_status ? 'Trial' : 'Active'}
                   </p>
                 </div>
               </div>
@@ -556,8 +545,8 @@ export default function Dashboard() {
                   <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
                     Current Plan
                   </p>
-                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: org.plan === 'pro' ? '#10B981' : '#D97706', margin: 0 }}>
-                    {org.plan === 'pro' ? '✓ Pro - $29/month' : trialDaysLeft > 0 ? `Trial (${trialDaysLeft} days left)` : 'Trial Expired'}
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: contextOrg?.plan === 'pro' ? '#10B981' : '#D97706', margin: 0 }}>
+                    {contextOrg?.plan === 'pro' ? '✓ Pro - $29/month' : trialDaysLeft > 0 ? `Trial (${trialDaysLeft} days left)` : 'Trial Expired'}
                   </p>
                 </div>
                 <a
@@ -567,17 +556,17 @@ export default function Dashboard() {
                     fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                     fontSize: '13px',
                     fontWeight: 500,
-                    color: org.plan === 'pro' ? '#10B981' : '#D97706',
+                    color: contextOrg?.plan === 'pro' ? '#10B981' : '#D97706',
                     textDecoration: 'none',
                     padding: '8px 12px',
-                    border: `1px solid ${org.plan === 'pro' ? '#D1FAE5' : '#FED7AA'}`,
+                    border: `1px solid ${contextOrg?.plan === 'pro' ? '#D1FAE5' : '#FED7AA'}`,
                     borderRadius: '4px',
-                    background: org.plan === 'pro' ? '#ECFDF5' : '#FEF3C7',
+                    background: contextOrg?.plan === 'pro' ? '#ECFDF5' : '#FEF3C7',
                     cursor: 'pointer',
                   }}
                   className="hover:opacity-80 transition-opacity"
                 >
-                  {org.plan === 'pro' ? 'Manage Subscription' : 'Upgrade to Pro'}
+                  {contextOrg?.plan === 'pro' ? 'Manage Subscription' : 'Upgrade to Pro'}
                 </a>
               </div>
             </div>
