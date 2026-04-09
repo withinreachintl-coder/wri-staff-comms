@@ -58,6 +58,18 @@ export default function Dashboard() {
     loadDashboard()
   }, [])
 
+  // Listen for organization name updates from settings page
+  useEffect(() => {
+    const handleOrgNameUpdate = (event: any) => {
+      if (event.detail?.name) {
+        setOrg((prev) => prev ? { ...prev, name: event.detail.name } : null)
+      }
+    }
+
+    window.addEventListener('orgNameUpdated', handleOrgNameUpdate)
+    return () => window.removeEventListener('orgNameUpdated', handleOrgNameUpdate)
+  }, [])
+
   const loadDashboard = async () => {
     try {
       setLoading(true)
@@ -242,6 +254,25 @@ export default function Dashboard() {
                 {user.role}
               </p>
             </div>
+            <Link
+              href="/settings"
+              style={{
+                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                fontSize: '13px',
+                fontWeight: 500,
+                color: '#F5F0E8',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '4px',
+                padding: '8px 16px',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                display: 'inline-block',
+              }}
+              className="hover:opacity-80 transition-opacity"
+            >
+              Settings
+            </Link>
             <button
               onClick={handleLogout}
               style={{
