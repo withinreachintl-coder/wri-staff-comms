@@ -514,6 +514,42 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
+
+            {/* Billing section */}
+            <div>
+              <h3 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '16px', fontWeight: 700, color: '#1C1917', margin: '0 0 16px 0' }}>
+                Billing
+              </h3>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
+                <div style={{ marginBottom: '16px' }}>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '11px', color: '#1C1917', margin: '0 0 4px 0' }}>
+                    Current Plan
+                  </p>
+                  <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: org.plan === 'pro' ? '#10B981' : '#D97706', margin: 0 }}>
+                    {org.plan === 'pro' ? '✓ Pro - $29/month' : trialDaysLeft > 0 ? `Trial (${trialDaysLeft} days left)` : 'Trial Expired'}
+                  </p>
+                </div>
+                <a
+                  href="/billing"
+                  style={{
+                    display: 'inline-block',
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '13px',
+                    fontWeight: 500,
+                    color: org.plan === 'pro' ? '#10B981' : '#D97706',
+                    textDecoration: 'none',
+                    padding: '8px 12px',
+                    border: `1px solid ${org.plan === 'pro' ? '#D1FAE5' : '#FED7AA'}`,
+                    borderRadius: '4px',
+                    background: org.plan === 'pro' ? '#ECFDF5' : '#FEF3C7',
+                    cursor: 'pointer',
+                  }}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  {org.plan === 'pro' ? 'Manage Subscription' : 'Upgrade to Pro'}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
