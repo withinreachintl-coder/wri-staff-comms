@@ -173,7 +173,7 @@ export default function LandingPage() {
           Everything your team needs. Nothing it doesn&apos;t.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
           {[
             {
               icon: (
@@ -203,32 +203,8 @@ export default function LandingPage() {
               body: 'See who opened your announcement and when. Follow up with the three people who missed it — not the whole team.',
             },
           ].map((feature, i) => (
-            <div
-              key={i}
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
-                borderRadius: '8px',
-                padding: '32px 28px',
-                transition: 'border-color 0.25s ease',
-              }}
-              className="hover:!border-[rgba(217,119,6,0.15)]"
-            >
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  background: 'rgba(217,119,6,0.1)',
-                  border: '1px solid rgba(217,119,6,0.2)',
-                  borderRadius: '4px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '20px',
-                }}
-              >
-                {feature.icon}
-              </div>
+            <div key={i}>
+
               <h3
                 style={{
                   fontFamily: 'var(--font-playfair), "Playfair Display", serif',
