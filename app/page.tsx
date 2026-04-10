@@ -94,67 +94,38 @@ export default function LandingPage() {
           Pricing
         </p>
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '48px' }}>
-          Simple. Honest. No surprises.
+          Simple, honest pricing.
         </h2>
-
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-          {/* Free Tier */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '40px 32px' }}>
-            <p style={{ color: '#A8A29E', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>
-              Free
+          {/* Free */}
+          <div style={{ background: '#292524', borderRadius: '12px', padding: '32px' }}>
+            <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#A8A29E', marginBottom: '16px' }}>Free</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '48px', fontWeight: 700, marginBottom: '24px' }}>
+              $0<span style={{ fontSize: '16px', color: '#A8A29E', fontFamily: 'DM Sans, sans-serif' }}>/month</span>
             </p>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
-              <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '40px', fontWeight: 700 }}>$0</span>
-              <span style={{ color: '#6B5B4E', fontSize: '14px' }}>/month</span>
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
-              {['Up to 3 team members', 'Basic announcements', 'Limited read receipts'].map((item, i) => (
-                <li key={i} style={{ display: 'flex', gap: '12px', marginBottom: '16px', fontSize: '14px', color: '#A8A29E' }}>
-                  <span style={{ color: '#D97706' }}>✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link href="/login" style={{
-              display: 'block', width: '100%', textAlign: 'center',
-              border: '1px solid rgba(255,255,255,0.2)', color: '#F5F0E8', padding: '12px',
-              borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '14px'
-            }}>
-              Get Started
-            </Link>
+            {['Up to 5 team members', 'Announcements', 'Basic shift swap requests'].map(item => (
+              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
+            ))}
+            <a href="/signup" style={{
+              display: 'block', textAlign: 'center', marginTop: '32px',
+              border: '1px solid #57534E', padding: '12px', borderRadius: '8px',
+              color: '#F5F0E8', textDecoration: 'none', fontSize: '15px'
+            }}>Get Started</a>
           </div>
-
-          {/* Pro Tier */}
-          <div style={{ background: 'rgba(217,119,6,0.08)', border: '2px solid rgba(217,119,6,0.2)', borderRadius: '12px', padding: '40px 32px', position: 'relative' }}>
-            <div style={{
-              position: 'absolute', top: '-14px', left: '32px',
-              background: '#D97706', color: '#1C1917', padding: '4px 16px',
-              borderRadius: '6px', fontSize: '11px', fontWeight: 600
-            }}>
-              RECOMMENDED
-            </div>
-            <p style={{ color: '#D97706', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>
-              Pro
+          {/* Pro */}
+          <div style={{ background: '#292524', borderRadius: '12px', padding: '32px', border: '1px solid #D97706' }}>
+            <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#D97706', marginBottom: '16px' }}>Pro</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '48px', fontWeight: 700, marginBottom: '24px' }}>
+              $29<span style={{ fontSize: '16px', color: '#A8A29E', fontFamily: 'DM Sans, sans-serif' }}>/month</span>
             </p>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
-              <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '40px', fontWeight: 700 }}>$29</span>
-              <span style={{ color: '#6B5B4E', fontSize: '14px' }}>/month</span>
-            </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
-              {['Unlimited team members', 'Unlimited announcements', 'Shift swap management', 'Full read receipts', 'Mobile app access'].map((item, i) => (
-                <li key={i} style={{ display: 'flex', gap: '12px', marginBottom: '16px', fontSize: '14px', color: '#A8A29E' }}>
-                  <span style={{ color: '#D97706' }}>✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <Link href="/login" style={{
-              display: 'block', width: '100%', textAlign: 'center',
-              background: '#D97706', color: '#1C1917', padding: '12px',
-              borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '14px'
-            }}>
-              Start 14-Day Free Trial
-            </Link>
+            {['Unlimited team members', 'Unlimited announcements', 'Shift swap management', 'Read receipts on every message', 'Priority support'].map(item => (
+              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
+            ))}
+            <a href="/signup" style={{
+              display: 'block', textAlign: 'center', marginTop: '32px',
+              background: '#D97706', padding: '12px', borderRadius: '8px',
+              color: '#fff', textDecoration: 'none', fontSize: '15px', fontWeight: 600
+            }}>Start 14-Day Free Trial</a>
           </div>
         </div>
       </section>
@@ -162,27 +133,30 @@ export default function LandingPage() {
       {/* CTA */}
       <section style={{ padding: '80px 24px', textAlign: 'center', maxWidth: '768px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '16px' }}>
-          Ready to replace WhatsApp chaos?
+          Ready to run a tighter ship?
         </h2>
         <p style={{ color: '#A8A29E', fontSize: '16px', marginBottom: '32px' }}>
           Start your free trial. No credit card. Cancel anytime.
         </p>
-        <Link href="/login" style={{
-          background: '#D97706', color: '#fff', padding: '14px 28px',
-          borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
-        }}>Start 14-Day Free Trial</Link>
+        <a href="/signup" style={{
+          background: '#D97706', color: '#fff', padding: '16px 36px',
+          borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px'
+        }}>Start 14-Day Free Trial</a>
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '40px 24px', maxWidth: '768px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <p style={{ fontSize: '13px', color: '#6B5B4E' }}>
-          Part of the <a href="https://wireach.tools" style={{ color: '#A8A29E', textDecoration: 'underline' }}>WiReach Tools</a> suite for independent restaurants.
-        </p>
+      <footer style={{
+        borderTop: '1px solid #292524', padding: '24px',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        maxWidth: '768px', margin: '0 auto', flexWrap: 'wrap', gap: '12px'
+      }}>
+        <span style={{ color: '#78716C', fontSize: '13px' }}>Built for independent restaurants, by an independent restaurant owner.</span>
         <div style={{ display: 'flex', gap: '24px' }}>
-          <a href="#" style={{ color: '#A8A29E', textDecoration: 'none', fontSize: '13px' }}>Privacy</a>
-          <a href="#" style={{ color: '#A8A29E', textDecoration: 'none', fontSize: '13px' }}>Terms</a>
+          <a href="#features" style={{ color: '#78716C', fontSize: '13px', textDecoration: 'none' }}>How It Works</a>
+          <a href="mailto:support@wireach.tools" style={{ color: '#78716C', fontSize: '13px', textDecoration: 'none' }}>support@wireach.tools</a>
         </div>
       </footer>
+
     </main>
   )
 }
