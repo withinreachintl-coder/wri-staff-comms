@@ -2,148 +2,50 @@ import Link from 'next/link'
 
 export default function LandingPage() {
   return (
-    <main style={{ background: '#1C1917', color: '#F5F0E8' }}>
-      {/* Nav — Fixed, full-width */}
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div
-              style={{
-                width: '32px',
-                height: '32px',
-                background: 'rgba(217,119,6,0.15)',
-                border: '1px solid rgba(217,119,6,0.3)',
-                borderRadius: '4px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#D97706',
-                fontSize: '16px',
-                fontWeight: 700,
-              }}
-            >
-              &#10003;
-            </div>
-            <span
-              style={{
-                fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-                fontSize: '18px',
-                fontWeight: 600,
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Staff Comms
-            </span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-            <a
-              href="/help"
-              className="hidden sm:inline hover:opacity-80 transition-opacity"
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '14px',
-                fontWeight: 400,
-                color: '#A89880',
-                textDecoration: 'none',
-              }}
-            >
-              How It Works
-            </a>
-          <Link
-            href="/login"
-            className="hover:opacity-80 transition-opacity"
-            style={{
-              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-              fontSize: '14px',
-              fontWeight: 500,
-              color: '#F5F0E8',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '4px',
-              padding: '8px 20px',
-              textDecoration: 'none',
-            }}
-          >
-            Log In
-          </Link>
-          </div>
+    <main style={{ background: '#1C1917', color: '#F5F0E8', fontFamily: 'DM Sans, sans-serif' }}>
+
+      {/* Nav */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)',
+        height: '64px', display: 'flex', alignItems: 'center',
+        padding: '0 24px', justifyContent: 'space-between'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{
+            width: '32px', height: '32px', background: '#D97706',
+            borderRadius: '6px', display: 'flex', alignItems: 'center',
+            justifyContent: 'center', fontSize: '16px', color: '#fff', fontWeight: 700
+          }}>✓</div>
+          <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '18px', fontWeight: 700 }}>Staff Comms</span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <a href="#features" style={{ color: '#F5F0E8', textDecoration: 'none', fontSize: '15px' }}>How It Works</a>
+          <a href="/login" style={{
+            border: '1px solid #F5F0E8', padding: '8px 20px',
+            borderRadius: '6px', color: '#F5F0E8', textDecoration: 'none', fontSize: '15px'
+          }}>Log In</a>
         </div>
       </nav>
 
-      {/* Page Container */}
-      <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0 24px' }}>
-        {/* Hero */}
-        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '64px' }}>
-          <div className="w-full">
-          <p
-            style={{
-              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#D97706',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase' as const,
-              marginBottom: '20px',
-            }}
-          >
-            For independent restaurants
-          </p>
-          <h1
-            style={{
-              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-              fontWeight: 700,
-              lineHeight: 1.1,
-              marginBottom: '24px',
-            }}
-          >
-            Your team deserves<br />
-            better than<br />
-            <span style={{ color: '#D97706' }}>a WhatsApp group chat.</span>
-          </h1>
-          <p
-            style={{
-              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-              fontSize: '18px',
-              fontWeight: 300,
-              lineHeight: 1.7,
-              color: '#A89880',
-              maxWidth: '520px',
-              marginBottom: '40px',
-            }}
-          >
-            Announcements get buried. Shift swaps fall through the cracks. Staff Comms
-            gives your restaurant team one clear place to coordinate — with read receipts
-            so you know who saw what.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/login"
-              className="hover:opacity-90 transition-opacity"
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                background: '#D97706',
-                color: '#1C1917',
-                fontSize: '15px',
-                fontWeight: 500,
-                padding: '14px 32px',
-                borderRadius: '4px',
-                textDecoration: 'none',
-                display: 'inline-block',
-              }}
-            >
-              Start 14-Day Free Trial
-            </Link>
-            <span
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '13px',
-                fontWeight: 400,
-                color: '#6B5B4E',
-              }}
-            >
-              No credit card required &middot; $29/mo after trial
-            </span>
-          </div>
+      {/* Hero */}
+      <section style={{ paddingTop: '160px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px', maxWidth: '768px', margin: '0 auto' }}>
+        <p style={{ color: '#D97706', fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '24px' }}>
+          For Independent Restaurants
+        </p>
+        <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '52px', lineHeight: 1.1, fontWeight: 700, marginBottom: '24px' }}>
+          Your team deserves better than{' '}
+          <span style={{ color: '#D97706' }}>a WhatsApp group chat.</span>
+        </h1>
+        <p style={{ fontSize: '18px', color: '#A8A29E', lineHeight: 1.6, marginBottom: '40px', maxWidth: '560px' }}>
+          Announcements get buried. Shift swaps fall through the cracks. Staff Comms gives your restaurant team one clear place to coordinate — with read receipts so you know who saw what.
+        </p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+          <Link href="/login" style={{
+            background: '#D97706', color: '#fff', padding: '14px 28px',
+            borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
+          }}>Start 14-Day Free Trial</Link>
+          <span style={{ color: '#78716C', fontSize: '14px' }}>No credit card required · $29/mo after trial</span>
         </div>
       </section>
 
@@ -174,212 +76,85 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Quote */}
-      <section className="py-20 md:py-24">
-        <div
-          style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.06)',
-            borderRadius: '8px',
-            padding: '40px 36px',
-            position: 'relative' as const,
-            overflow: 'hidden',
-          }}
-        >
-          {/* Decorative quotation mark */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              top: '-8px',
-              left: '24px',
-              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-              fontSize: '120px',
-              fontWeight: 700,
-              lineHeight: 1,
-              color: 'rgba(217,119,6,0.08)',
-              userSelect: 'none',
-              pointerEvents: 'none',
-            }}
-          >
-            &ldquo;
-          </div>
-          <p
-            style={{
-              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.35rem)',
-              fontWeight: 400,
-              fontStyle: 'italic',
-              lineHeight: 1.6,
-              marginBottom: '16px',
-              position: 'relative',
-            }}
-          >
-            &ldquo;We were losing team members because they didn&apos;t see shift swap
-            requests. Now everything is crystal clear and we&apos;re actually scheduling
-            people who want to work.&rdquo;
+      {/* Testimonial */}
+      <section style={{ padding: '80px 24px', maxWidth: '768px', margin: '0 auto' }}>
+        <div style={{ background: 'rgba(217,119,6,0.06)', border: '1px solid rgba(217,119,6,0.15)', borderRadius: '12px', padding: '48px 40px' }}>
+          <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '20px', fontStyle: 'italic', lineHeight: 1.6, marginBottom: '20px' }}>
+            "We were losing team members because they didn't see shift swap requests. Now everything is crystal clear and we're actually scheduling people who want to work."
           </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
-            <div
-              style={{
-                width: '24px',
-                height: '1px',
-                background: 'rgba(217,119,6,0.3)',
-              }}
-            />
-            <p
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '13px',
-                fontWeight: 400,
-                color: '#6B5B4E',
-              }}
-            >
-              Restaurant manager, frustrated with team communication gaps
-            </p>
-          </div>
+          <p style={{ fontSize: '14px', color: '#6B5B4E' }}>
+            Restaurant manager, frustrated with team communication gaps
+          </p>
         </div>
       </section>
 
       {/* Pricing */}
-      <section className="py-20 md:py-24">
-        <p
-          style={{
-            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-            fontSize: '13px',
-            fontWeight: 500,
-            color: '#6B5B4E',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase' as const,
-            marginBottom: '12px',
-          }}
-        >
+      <section style={{ padding: '80px 24px', maxWidth: '768px', margin: '0 auto' }}>
+        <p style={{ color: '#D97706', fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '16px' }}>
           Pricing
         </p>
-        <h2
-          style={{
-            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
-            fontWeight: 500,
-            marginBottom: '48px',
-          }}
-        >
+        <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '48px' }}>
           Simple. Honest. No surprises.
         </h2>
 
-        <div className="grid md:grid-cols-1 gap-6 max-w-2xl">
-          {/* Pro Tier */}
-          <div
-            style={{
-              background: 'rgba(217,119,6,0.06)',
-              border: '1px solid rgba(217,119,6,0.2)',
-              borderRadius: '8px',
-              padding: '36px 32px',
-              position: 'relative' as const,
-            }}
-          >
-            <div
-              style={{
-                position: 'absolute' as const,
-                top: '-12px',
-                left: '32px',
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '11px',
-                fontWeight: 500,
-                color: '#1C1917',
-                background: '#D97706',
-                padding: '4px 12px',
-                borderRadius: '4px',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase' as const,
-              }}
-            >
-              One Plan. Everything Included.
-            </div>
-            <p
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '12px',
-                fontWeight: 500,
-                color: '#D97706',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase' as const,
-                marginBottom: '8px',
-              }}
-            >
-              Staff Comms
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          {/* Free Tier */}
+          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '40px 32px' }}>
+            <p style={{ color: '#A8A29E', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>
+              Free
             </p>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '24px' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-                  fontSize: '40px',
-                  fontWeight: 700,
-                }}
-              >
-                $29
-              </span>
-              <span
-                style={{
-                  fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                  fontSize: '14px',
-                  fontWeight: 300,
-                  color: '#6B5B4E',
-                }}
-              >
-                /month
-              </span>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
+              <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '40px', fontWeight: 700 }}>$0</span>
+              <span style={{ color: '#6B5B4E', fontSize: '14px' }}>/month</span>
             </div>
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 28px 0' }}>
-              {['Unlimited announcements', 'Shift swap management', 'Read receipts on every message', 'Unlimited team members', 'Mobile-first design'].map((item, i) => (
-                <li
-                  key={i}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '10px',
-                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                    fontSize: '14px',
-                    fontWeight: 300,
-                    color: '#A89880',
-                    marginBottom: '12px',
-                  }}
-                >
-                  <span style={{ color: '#D97706', marginTop: '2px', flexShrink: 0 }}>&#10003;</span>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
+              {['Up to 3 team members', 'Basic announcements', 'Limited read receipts'].map((item, i) => (
+                <li key={i} style={{ display: 'flex', gap: '12px', marginBottom: '16px', fontSize: '14px', color: '#A8A29E' }}>
+                  <span style={{ color: '#D97706' }}>✓</span>
                   {item}
                 </li>
               ))}
             </ul>
-            <Link
-              href="/login"
-              className="hover:opacity-90 transition-opacity"
-              style={{
-                display: 'block',
-                textAlign: 'center',
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: '#1C1917',
-                background: '#D97706',
-                borderRadius: '4px',
-                padding: '12px 24px',
-                textDecoration: 'none',
-              }}
-            >
+            <Link href="/login" style={{
+              display: 'block', width: '100%', textAlign: 'center',
+              border: '1px solid rgba(255,255,255,0.2)', color: '#F5F0E8', padding: '12px',
+              borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '14px'
+            }}>
+              Get Started
+            </Link>
+          </div>
+
+          {/* Pro Tier */}
+          <div style={{ background: 'rgba(217,119,6,0.08)', border: '2px solid rgba(217,119,6,0.2)', borderRadius: '12px', padding: '40px 32px', position: 'relative' }}>
+            <div style={{
+              position: 'absolute', top: '-14px', left: '32px',
+              background: '#D97706', color: '#1C1917', padding: '4px 16px',
+              borderRadius: '6px', fontSize: '11px', fontWeight: 600
+            }}>
+              RECOMMENDED
+            </div>
+            <p style={{ color: '#D97706', fontSize: '12px', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>
+              Pro
+            </p>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '32px' }}>
+              <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '40px', fontWeight: 700 }}>$29</span>
+              <span style={{ color: '#6B5B4E', fontSize: '14px' }}>/month</span>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px 0' }}>
+              {['Unlimited team members', 'Unlimited announcements', 'Shift swap management', 'Full read receipts', 'Mobile app access'].map((item, i) => (
+                <li key={i} style={{ display: 'flex', gap: '12px', marginBottom: '16px', fontSize: '14px', color: '#A8A29E' }}>
+                  <span style={{ color: '#D97706' }}>✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link href="/login" style={{
+              display: 'block', width: '100%', textAlign: 'center',
+              background: '#D97706', color: '#1C1917', padding: '12px',
+              borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '14px'
+            }}>
               Start 14-Day Free Trial
             </Link>
-            <p
-              style={{
-                fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                fontSize: '12px',
-                fontWeight: 300,
-                color: '#6B5B4E',
-                marginTop: '12px',
-                textAlign: 'center',
-              }}
-            >
-              No credit card required
-            </p>
           </div>
         </div>
       </section>
@@ -387,43 +162,27 @@ export default function LandingPage() {
       {/* CTA */}
       <section style={{ padding: '80px 24px', textAlign: 'center', maxWidth: '768px', margin: '0 auto' }}>
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '16px' }}>
-          Ready to run a tighter ship?
+          Ready to replace WhatsApp chaos?
         </h2>
         <p style={{ color: '#A8A29E', fontSize: '16px', marginBottom: '32px' }}>
-          14 days free. No credit card. Cancel anytime.
+          Start your free trial. No credit card. Cancel anytime.
         </p>
         <Link href="/login" style={{
-          background: '#D97706', color: '#fff', padding: '16px 36px',
+          background: '#D97706', color: '#fff', padding: '14px 28px',
           borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
-        }}>Start Free Trial</Link>
+        }}>Start 14-Day Free Trial</Link>
       </section>
 
       {/* Footer */}
-      <footer className="py-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p
-            style={{
-              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-              fontSize: '13px',
-              fontWeight: 300,
-              color: '#6B5B4E',
-            }}
-          >
-            Part of the <a href="https://wireach.tools" style={{ color: '#A89880', textDecoration: 'underline', textDecorationColor: 'rgba(217,119,6,0.3)' }}>WiReach Tools</a> suite
-          </p>
-          <p
-            style={{
-              fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-              fontSize: '13px',
-              fontWeight: 300,
-              color: '#6B5B4E',
-            }}
-          >
-            staff.wireach.tools
-          </p>
+      <footer style={{ padding: '40px 24px', maxWidth: '768px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <p style={{ fontSize: '13px', color: '#6B5B4E' }}>
+          Part of the <a href="https://wireach.tools" style={{ color: '#A8A29E', textDecoration: 'underline' }}>WiReach Tools</a> suite for independent restaurants.
+        </p>
+        <div style={{ display: 'flex', gap: '24px' }}>
+          <a href="#" style={{ color: '#A8A29E', textDecoration: 'none', fontSize: '13px' }}>Privacy</a>
+          <a href="#" style={{ color: '#A8A29E', textDecoration: 'none', fontSize: '13px' }}>Terms</a>
         </div>
       </footer>
-      </div>
     </main>
   )
 }
