@@ -234,13 +234,15 @@ export default function LoginPage() {
           }}
         >
           Don&apos;t have an account?{' '}
-          <Link
-            href="https://buy.stripe.com/7sYdR859f5B37Mz2Qp9k404"
+          <a
+            href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{ color: '#D97706', textDecoration: 'none', fontWeight: 500 }}
             className="hover:opacity-80 transition-opacity"
           >
             Start free trial
-          </Link>
+          </a>
         </p>
       </div>
     </main>
