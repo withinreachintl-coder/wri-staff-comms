@@ -148,84 +148,27 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="py-20 md:py-24">
-        <p
-          style={{
-            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-            fontSize: '13px',
-            fontWeight: 500,
-            color: '#6B5B4E',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase' as const,
-            marginBottom: '12px',
-          }}
-        >
-          What you get
+      <section id="features" style={{ padding: '80px 24px', maxWidth: '768px', margin: '0 auto' }}>
+        <p style={{ color: '#D97706', fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '16px' }}>
+          What You Get
         </p>
-        <h2
-          style={{
-            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
-            fontWeight: 500,
-            marginBottom: '48px',
-          }}
-        >
-          Everything your team needs. Nothing it doesn&apos;t.
+        <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '48px' }}>
+          Everything your team needs. Nothing it doesn't.
         </h2>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
           {[
-            {
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" />
-                </svg>
-              ),
-              label: 'Announcements',
-              body: 'Broadcast updates to your entire team or specific roles. No more "did you see my message?" — you\'ll know exactly who read it.',
-            },
-            {
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" /><path d="M12 6v6l4 2" />
-                </svg>
-              ),
-              label: 'Shift Swaps',
-              body: 'Staff request a swap, teammates claim it, manager approves. Clean, traceable, no more screenshot negotiations.',
-            },
-            {
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" />
-                </svg>
-              ),
-              label: 'Read Receipts',
-              body: 'See who opened your announcement and when. Follow up with the three people who missed it — not the whole team.',
-            },
-          ].map((feature, i) => (
-            <div key={i}>
-
-              <h3
-                style={{
-                  fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-                  fontSize: '18px',
-                  fontWeight: 500,
-                  marginBottom: '12px',
-                }}
-              >
-                {feature.label}
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-                  fontSize: '14px',
-                  fontWeight: 300,
-                  lineHeight: 1.7,
-                  color: '#A89880',
-                }}
-              >
-                {feature.body}
-              </p>
+            { icon: '👁', title: 'Announcements', desc: 'Broadcast updates to your entire team or specific roles. No more "did you see my message?" — you\'ll know exactly who read it.' },
+            { icon: '🕐', title: 'Shift Swaps', desc: 'Staff request a swap, teammates claim it, manager approves. Clean, traceable, no more screenshot negotiations.' },
+            { icon: '✓', title: 'Read Receipts', desc: 'See who opened your announcement and when. Follow up with the three people who missed it — not the whole team.' },
+          ].map((f) => (
+            <div key={f.title} style={{ background: '#292524', borderRadius: '12px', padding: '28px' }}>
+              <div style={{
+                width: '40px', height: '40px', background: '#1C1917', borderRadius: '8px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '18px', color: '#D97706', marginBottom: '20px'
+              }}>{f.icon}</div>
+              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '18px', fontWeight: 600, marginBottom: '12px' }}>{f.title}</h3>
+              <p style={{ color: '#A8A29E', fontSize: '14px', lineHeight: 1.6 }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -441,46 +384,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 md:py-24 text-center">
-        <h2
-          style={{
-            fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-            fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)',
-            fontWeight: 500,
-            marginBottom: '16px',
-          }}
-        >
-          Ready to replace WhatsApp chaos?
+      {/* CTA */}
+      <section style={{ padding: '80px 24px', textAlign: 'center', maxWidth: '768px', margin: '0 auto' }}>
+        <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '36px', fontWeight: 700, marginBottom: '16px' }}>
+          Ready to run a tighter ship?
         </h2>
-        <p
-          style={{
-            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-            fontSize: '16px',
-            fontWeight: 300,
-            color: '#A89880',
-            marginBottom: '32px',
-          }}
-        >
-          Start your free trial. No credit card. Cancel anytime.
+        <p style={{ color: '#A8A29E', fontSize: '16px', marginBottom: '32px' }}>
+          14 days free. No credit card. Cancel anytime.
         </p>
-        <Link
-          href="/login"
-          className="hover:opacity-90 transition-opacity"
-          style={{
-            fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
-            background: '#D97706',
-            color: '#1C1917',
-            fontSize: '15px',
-            fontWeight: 500,
-            padding: '14px 32px',
-            borderRadius: '4px',
-            textDecoration: 'none',
-            display: 'inline-block',
-          }}
-        >
-          Start 14-Day Free Trial
-        </Link>
+        <Link href="/login" style={{
+          background: '#D97706', color: '#fff', padding: '16px 36px',
+          borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
+        }}>Start Free Trial</Link>
       </section>
 
       {/* Footer */}
