@@ -1,4 +1,6 @@
-import Link from 'next/link'
+"use client"
+
+import Link from "next/link"
 
 export default function LandingPage() {
   return (
@@ -18,7 +20,7 @@ export default function LandingPage() {
               justifyContent: 'center',
               color: '#D97706',
               fontSize: '16px',
-              fontWeight: 700',
+              fontWeight: 700,
             }}
           >
             &#10003;
