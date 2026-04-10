@@ -3,9 +3,9 @@ import Link from 'next/link'
 export default function LandingPage() {
   return (
     <main style={{ background: '#1C1917', color: '#F5F0E8' }}>
-      {/* Nav — Fixed */}
-      <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="flex justify-between items-center" style={{ maxWidth: '768px', margin: '0 auto', padding: '20px 24px' }}>
+      {/* Nav — Fixed, full-width */}
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '768px', margin: '0 auto', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="flex items-center gap-3">
             <div
               style={{
@@ -72,7 +72,7 @@ export default function LandingPage() {
       {/* Page Container */}
       <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0 24px' }}>
         {/* Hero */}
-        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '80px' }}>
+        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '64px' }}>
           <div className="w-full">
           <p
             style={{
