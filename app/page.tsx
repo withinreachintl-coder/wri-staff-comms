@@ -106,7 +106,7 @@ export default function LandingPage() {
             {['Up to 5 team members', 'Announcements', 'Basic shift swap requests'].map(item => (
               <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
             ))}
-            <a href="/signup" style={{
+            <a href="https://buy.stripe.com/28E5kC8lr0gJaYLcqZ9k403" target="_blank" style={{
               display: 'block', textAlign: 'center', marginTop: '32px',
               border: '1px solid #57534E', padding: '12px', borderRadius: '8px',
               color: '#F5F0E8', textDecoration: 'none', fontSize: '15px'
@@ -121,7 +121,7 @@ export default function LandingPage() {
             {['Unlimited team members', 'Unlimited announcements', 'Shift swap management', 'Read receipts on every message', 'Priority support'].map(item => (
               <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
             ))}
-            <a href="/signup" style={{
+            <a href="https://buy.stripe.com/7sY8wO1X3e7zgj58aJ9k409" target="_blank" style={{
               display: 'block', textAlign: 'center', marginTop: '32px',
               background: '#D97706', padding: '12px', borderRadius: '8px',
               color: '#fff', textDecoration: 'none', fontSize: '15px', fontWeight: 600
@@ -138,7 +138,7 @@ export default function LandingPage() {
         <p style={{ color: '#A8A29E', fontSize: '16px', marginBottom: '32px' }}>
           Start your free trial. No credit card. Cancel anytime.
         </p>
-        <a href="/signup" style={{
+        <a href="https://buy.stripe.com/7sY8wO1X3e7zgj58aJ9k409" target="_blank" style={{
           background: '#D97706', color: '#fff', padding: '16px 36px',
           borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px'
         }}>Start 14-Day Free Trial</a>
