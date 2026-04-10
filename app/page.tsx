@@ -1,42 +1,41 @@
-"use client"
-
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function LandingPage() {
   return (
     <main style={{ background: '#1C1917', color: '#F5F0E8' }}>
-      {/* Nav */}
-      <nav className="px-6 py-6 flex justify-between items-center" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)' }}>
-        <div className="flex items-center gap-3" style={{ maxWidth: '5xl', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
-          <div
-            style={{
-              width: '32px',
-              height: '32px',
-              background: 'rgba(217,119,6,0.15)',
-              border: '1px solid rgba(217,119,6,0.3)',
-              borderRadius: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#D97706',
-              fontSize: '16px',
-              fontWeight: 700,
-            }}
-          >
-            &#10003;
+      {/* Nav — Fixed */}
+      <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex justify-between items-center" style={{ maxWidth: '768px', margin: '0 auto', padding: '20px 24px' }}>
+          <div className="flex items-center gap-3">
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                background: 'rgba(217,119,6,0.15)',
+                border: '1px solid rgba(217,119,6,0.3)',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#D97706',
+                fontSize: '16px',
+                fontWeight: 700,
+              }}
+            >
+              &#10003;
+            </div>
+            <span
+              style={{
+                fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+                fontSize: '18px',
+                fontWeight: 600,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Staff Comms
+            </span>
           </div>
-          <span
-            style={{
-              fontFamily: 'var(--font-playfair), "Playfair Display", serif',
-              fontSize: '18px',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-            }}
-          >
-            Staff Comms
-          </span>
-        </div>
-        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6">
           <a
             href="/help"
             className="hidden sm:inline hover:opacity-80 transition-opacity"
@@ -66,13 +65,15 @@ export default function LandingPage() {
           >
             Log In
           </Link>
+          </div>
         </div>
       </nav>
 
-      {/* Hero — Full Height */}
-      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', background: '#1C1917', paddingTop: '80px' }}>
-        <div className="max-w-5xl mx-auto px-6 w-full">
-          <div className="max-w-3xl">
+      {/* Page Container */}
+      <div style={{ maxWidth: '768px', margin: '0 auto', padding: '0 24px' }}>
+        {/* Hero */}
+        <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', paddingTop: '80px' }}>
+          <div className="w-full">
           <p
             style={{
               fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -144,11 +145,10 @@ export default function LandingPage() {
             </span>
           </div>
         </div>
-          </div>
       </section>
 
       {/* Features */}
-      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+      <section className="py-20 md:py-24">
         <p
           style={{
             fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -173,7 +173,7 @@ export default function LandingPage() {
           Everything your team needs. Nothing it doesn&apos;t.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {[
             {
               icon: (
@@ -209,7 +209,7 @@ export default function LandingPage() {
                 background: 'rgba(255,255,255,0.03)',
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '8px',
-                padding: '40px 36px',
+                padding: '32px 28px',
                 transition: 'border-color 0.25s ease',
               }}
               className="hover:!border-[rgba(217,119,6,0.15)]"
@@ -256,13 +256,13 @@ export default function LandingPage() {
       </section>
 
       {/* Quote */}
-      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+      <section className="py-20 md:py-24">
         <div
           style={{
             background: 'rgba(255,255,255,0.02)',
             border: '1px solid rgba(255,255,255,0.06)',
             borderRadius: '8px',
-            padding: '48px 44px',
+            padding: '40px 36px',
             position: 'relative' as const,
             overflow: 'hidden',
           }}
@@ -323,7 +323,7 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
+      <section className="py-20 md:py-24">
         <p
           style={{
             fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -355,7 +355,7 @@ export default function LandingPage() {
               background: 'rgba(217,119,6,0.06)',
               border: '1px solid rgba(217,119,6,0.2)',
               borderRadius: '8px',
-              padding: '44px 40px',
+              padding: '36px 32px',
               position: 'relative' as const,
             }}
           >
@@ -466,7 +466,7 @@ export default function LandingPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
+      <section className="py-20 md:py-24 text-center">
         <h2
           style={{
             fontFamily: 'var(--font-playfair), "Playfair Display", serif',
@@ -508,7 +508,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="max-w-5xl mx-auto px-6 py-10">
+      <footer className="py-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p
             style={{
@@ -532,6 +532,7 @@ export default function LandingPage() {
           </p>
         </div>
       </footer>
+      </div>
     </main>
   )
 }
