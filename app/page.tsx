@@ -41,10 +41,10 @@ export default function LandingPage() {
           Announcements get buried. Shift swaps fall through the cracks. Staff Comms gives your restaurant team one clear place to coordinate — with read receipts so you know who saw what.
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-          <Link href="/login" style={{
+          <a href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d" target="_blank" rel="noopener noreferrer" style={{
             background: '#D97706', color: '#fff', padding: '14px 28px',
             borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
-          }}>Start 14-Day Free Trial</Link>
+          }}>Start 14-Day Free Trial</a>
           <span style={{ color: '#78716C', fontSize: '14px' }}>No credit card required · $29/mo after trial</span>
         </div>
       </section>
