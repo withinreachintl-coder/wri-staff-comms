@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen" style={{ background: '#1C1917', color: '#F5F0E8' }}>
+    <main style={{ background: '#1C1917', color: '#F5F0E8' }}>
       {/* Nav */}
-      <nav className="max-w-5xl mx-auto px-6 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
+      <nav className="px-6 py-6 flex justify-between items-center" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'rgba(28,25,23,0.95)', backdropFilter: 'blur(10px)' }}>
+        <div className="flex items-center gap-3" style={{ maxWidth: '5xl', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
           <div
             style={{
               width: '32px',
@@ -18,7 +18,7 @@ export default function LandingPage() {
               justifyContent: 'center',
               color: '#D97706',
               fontSize: '16px',
-              fontWeight: 700,
+              fontWeight: 700',
             }}
           >
             &#10003;
@@ -67,9 +67,10 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="max-w-5xl mx-auto px-6 pt-16 pb-20 md:pt-24 md:pb-28">
-        <div className="max-w-3xl">
+      {/* Hero — Full Height */}
+      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', background: '#1C1917', paddingTop: '80px' }}>
+        <div className="max-w-5xl mx-auto px-6 w-full">
+          <div className="max-w-3xl">
           <p
             style={{
               fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -141,15 +142,11 @@ export default function LandingPage() {
             </span>
           </div>
         </div>
+          </div>
       </section>
 
-      {/* Divider */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
-      </div>
-
       {/* Features */}
-      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
         <p
           style={{
             fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -174,7 +171,7 @@ export default function LandingPage() {
           Everything your team needs. Nothing it doesn&apos;t.
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-8">
           {[
             {
               icon: (
@@ -210,7 +207,7 @@ export default function LandingPage() {
                 background: 'rgba(255,255,255,0.03)',
                 border: '1px solid rgba(255,255,255,0.06)',
                 borderRadius: '8px',
-                padding: '32px 28px',
+                padding: '40px 36px',
                 transition: 'border-color 0.25s ease',
               }}
               className="hover:!border-[rgba(217,119,6,0.15)]"
@@ -256,19 +253,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
-      </div>
-
       {/* Quote */}
-      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
         <div
           style={{
             background: 'rgba(255,255,255,0.02)',
             border: '1px solid rgba(255,255,255,0.06)',
             borderRadius: '8px',
-            padding: '40px 36px',
+            padding: '48px 44px',
             position: 'relative' as const,
             overflow: 'hidden',
           }}
@@ -328,13 +320,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
-      </div>
-
       {/* Pricing */}
-      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24">
+      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32">
         <p
           style={{
             fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
@@ -366,7 +353,7 @@ export default function LandingPage() {
               background: 'rgba(217,119,6,0.06)',
               border: '1px solid rgba(217,119,6,0.2)',
               borderRadius: '8px',
-              padding: '36px 32px',
+              padding: '44px 40px',
               position: 'relative' as const,
             }}
           >
@@ -476,13 +463,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="max-w-5xl mx-auto px-6">
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }} />
-      </div>
-
       {/* Final CTA */}
-      <section className="max-w-5xl mx-auto px-6 py-20 md:py-24 text-center">
+      <section className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
         <h2
           style={{
             fontFamily: 'var(--font-playfair), "Playfair Display", serif',
@@ -524,7 +506,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="max-w-5xl mx-auto px-6 py-10" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <footer className="max-w-5xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p
             style={{
