@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import BottomNav from '@/app/components/BottomNav'
 
 interface User {
   id: string
@@ -46,8 +47,9 @@ export default function AnnouncementsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [selectedAnnouncementId, setSelectedAnnouncementId] = useState<string | null>(null)
+  // Mobile: show expanded view inline
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
-  // Check auth and load data
   useEffect(() => {
     const checkAuthAndLoadData = async () => {
       const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
@@ -57,7 +59,6 @@ export default function AnnouncementsPage() {
         return
       }
 
-      // Get user profile
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('*')
@@ -72,7 +73,6 @@ export default function AnnouncementsPage() {
 
       setUser(userData as User)
 
-      // Get organization
       const { data: orgData, error: orgError } = await supabase
         .from('organizations')
         .select('*')
@@ -86,10 +86,7 @@ export default function AnnouncementsPage() {
       }
 
       setOrg(orgData as Organization)
-
-      // Load announcements
       await loadAnnouncements(userData.org_id, authUser.id)
-
       setLoading(false)
     }
 
@@ -97,7 +94,6 @@ export default function AnnouncementsPage() {
   }, [router])
 
   const loadAnnouncements = async (orgId: string, userId: string) => {
-    // Get all announcements
     const { data: announcementData, error: announcementError } = await supabase
       .from('announcements')
       .select('*')
@@ -111,7 +107,6 @@ export default function AnnouncementsPage() {
 
     setAnnouncements(announcementData as Announcement[])
 
-    // Get user's read receipts
     const { data: readData, error: readError } = await supabase
       .from('announcement_reads')
       .select('announcement_id')
@@ -127,13 +122,8 @@ export default function AnnouncementsPage() {
       setReadStatus(readMap)
     }
 
-    // Get authors
     if (announcementData.length > 0) {
-      const authorIdSet = new Set<string>()
-      announcementData.forEach((a: any) => {
-        authorIdSet.add(a.author_id)
-      })
-      const authorIds = Array.from(authorIdSet)
+      const authorIds = Array.from(new Set(announcementData.map((a: any) => a.author_id)))
       const { data: authorData, error: authorError } = await supabase
         .from('users')
         .select('id, name')
@@ -143,7 +133,7 @@ export default function AnnouncementsPage() {
         console.error('Error loading authors:', authorError)
       } else {
         const authorMap: Record<string, Author> = {}
-        authorData.forEach((a) => {
+        authorData.forEach((a: Author) => {
           authorMap[a.id] = a
         })
         setAuthors(authorMap)
@@ -152,22 +142,14 @@ export default function AnnouncementsPage() {
   }
 
   const handleMarkAsRead = async (announcementId: string) => {
-    if (readStatus[announcementId] || !user) {
-      return
-    }
+    if (readStatus[announcementId] || !user) return
 
     const { error } = await supabase.from('announcement_reads').insert([
-      {
-        announcement_id: announcementId,
-        user_id: user.id,
-      },
+      { announcement_id: announcementId, user_id: user.id },
     ])
 
     if (!error) {
-      setReadStatus((prev) => ({
-        ...prev,
-        [announcementId]: true,
-      }))
+      setReadStatus((prev) => ({ ...prev, [announcementId]: true }))
     }
   }
 
@@ -193,21 +175,22 @@ export default function AnnouncementsPage() {
   }
 
   return (
-    <main className="min-h-screen" style={{ background: '#141210' }}>
+    <main className="min-h-screen pb-16 md:pb-0" style={{ background: '#141210' }}>
       {/* Navigation */}
       <nav
-        className="border-b"
+        className="border-b sticky top-0 z-40"
         style={{
           background: '#1C1917',
           borderColor: 'rgba(255,255,255,0.08)',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3 min-w-0">
             <div
               style={{
-                width: '32px',
-                height: '32px',
+                width: '28px',
+                height: '28px',
+                flexShrink: 0,
                 background: 'rgba(217,119,6,0.15)',
                 border: '1px solid rgba(217,119,6,0.3)',
                 borderRadius: '4px',
@@ -215,16 +198,17 @@ export default function AnnouncementsPage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#D97706',
-                fontSize: '16px',
+                fontSize: '14px',
                 fontWeight: 700,
               }}
             >
               ✓
             </div>
             <span
+              className="truncate"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: '18px',
+                fontSize: '16px',
                 fontWeight: 600,
                 color: '#F5F0E8',
               }}
@@ -232,13 +216,10 @@ export default function AnnouncementsPage() {
               {org.name}
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
             <span
-              style={{
-                fontSize: '13px',
-                color: '#A89880',
-                fontFamily: "'DM Sans', sans-serif",
-              }}
+              className="hidden sm:block"
+              style={{ fontSize: '13px', color: '#A89880', fontFamily: "'DM Sans', sans-serif" }}
             >
               {user.name}
             </span>
@@ -251,6 +232,8 @@ export default function AnnouncementsPage() {
                 border: 'none',
                 cursor: 'pointer',
                 fontFamily: "'DM Sans', sans-serif",
+                padding: '8px 0',
+                minHeight: '44px',
               }}
               className="hover:opacity-70 transition-opacity"
             >
@@ -260,27 +243,22 @@ export default function AnnouncementsPage() {
         </div>
       </nav>
 
-      <div className="max-w-3xl mx-auto px-6 py-12">
+      <div className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-12">
         {/* Header */}
-        <div style={{ marginBottom: '40px' }}>
+        <div style={{ marginBottom: '24px' }}>
           <h1
+            className="md:text-4xl"
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '32px',
+              fontSize: '26px',
               fontWeight: 700,
               color: '#F5F0E8',
-              marginBottom: '8px',
+              marginBottom: '6px',
             }}
           >
             Team Announcements
           </h1>
-          <p
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '14px',
-              color: '#A89880',
-            }}
-          >
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#A89880' }}>
             {announcements.length} announcement{announcements.length !== 1 ? 's' : ''}
           </p>
         </div>
@@ -288,20 +266,14 @@ export default function AnnouncementsPage() {
         {error && (
           <div
             style={{
-              marginBottom: '20px',
+              marginBottom: '16px',
               padding: '12px 16px',
               background: 'rgba(239,68,68,0.08)',
               border: '1px solid rgba(239,68,68,0.2)',
               borderRadius: '4px',
             }}
           >
-            <p
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '13px',
-                color: '#FCA5A5',
-              }}
-            >
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#FCA5A5' }}>
               {error}
             </p>
           </div>
@@ -318,141 +290,169 @@ export default function AnnouncementsPage() {
               textAlign: 'center',
             }}
           >
-            <p
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '14px',
-                color: '#A89880',
-              }}
-            >
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#A89880' }}>
               No announcements yet
             </p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2">
             {announcements.map((announcement) => {
               const isRead = readStatus[announcement.id]
               const author = authors[announcement.author_id]
+              const isExpanded = expandedId === announcement.id
 
               return (
-                <button
-                  key={announcement.id}
-                  onClick={() => {
-                    setSelectedAnnouncementId(announcement.id)
-                    if (!isRead) {
-                      handleMarkAsRead(announcement.id)
-                    }
-                  }}
-                  style={{
-                    width: '100%',
-                    padding: '20px',
-                    background:
-                      selectedAnnouncementId === announcement.id
+                <div key={announcement.id}>
+                  <button
+                    onClick={() => {
+                      setSelectedAnnouncementId(announcement.id)
+                      setExpandedId(isExpanded ? null : announcement.id)
+                      if (!isRead) {
+                        handleMarkAsRead(announcement.id)
+                      }
+                    }}
+                    style={{
+                      width: '100%',
+                      padding: '16px',
+                      minHeight: '64px',
+                      background: isExpanded
                         ? 'rgba(217,119,6,0.1)'
                         : isRead
                           ? 'rgba(255,255,255,0.02)'
                           : 'rgba(255,255,255,0.04)',
-                    border:
-                      selectedAnnouncementId === announcement.id
+                      border: isExpanded
                         ? '1px solid rgba(217,119,6,0.3)'
                         : '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                  className="hover:border-amber-600/50 hover:bg-amber-900/5"
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
+                      borderRadius: isExpanded ? '8px 8px 0 0' : '8px',
+                      textAlign: 'left',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
                     }}
+                    className="hover:border-amber-600/50"
                   >
-                    {/* Read indicator */}
-                    <div
-                      style={{
-                        width: '12px',
-                        height: '12px',
-                        borderRadius: '50%',
-                        background: isRead ? '#D97706' : 'rgba(255,255,255,0.3)',
-                        marginTop: '6px',
-                        flexShrink: 0,
-                      }}
-                    />
-
-                    {/* Content */}
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <h3
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                      {/* Read indicator dot */}
+                      <div
                         style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontSize: '15px',
-                          fontWeight: 500,
-                          color: '#F5F0E8',
-                          margin: '0 0 8px 0',
+                          width: '10px',
+                          height: '10px',
+                          borderRadius: '50%',
+                          background: isRead ? '#D97706' : 'rgba(255,255,255,0.25)',
+                          marginTop: '4px',
+                          flexShrink: 0,
+                        }}
+                      />
+
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '8px', marginBottom: '4px' }}>
+                          <h3
+                            style={{
+                              fontFamily: "'DM Sans', sans-serif",
+                              fontSize: '15px',
+                              fontWeight: 500,
+                              color: '#F5F0E8',
+                              margin: 0,
+                              flex: 1,
+                            }}
+                          >
+                            {announcement.title}
+                          </h3>
+                          {isRead && (
+                            <span
+                              style={{
+                                fontFamily: "'DM Sans', sans-serif",
+                                fontSize: '11px',
+                                color: '#D97706',
+                                flexShrink: 0,
+                              }}
+                            >
+                              ✓ Read
+                            </span>
+                          )}
+                        </div>
+
+                        {!isExpanded && (
+                          <p
+                            style={{
+                              fontFamily: "'DM Sans', sans-serif",
+                              fontSize: '13px',
+                              color: '#A89880',
+                              margin: '0 0 6px 0',
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {announcement.body.substring(0, 100)}
+                            {announcement.body.length > 100 ? '...' : ''}
+                          </p>
+                        )}
+
+                        <div style={{ display: 'flex', gap: '10px', fontSize: '12px' }}>
+                          <span style={{ fontFamily: "'DM Sans', sans-serif", color: '#6B5B4E' }}>
+                            {author?.name || 'Unknown'}
+                          </span>
+                          <span style={{ fontFamily: "'DM Sans', sans-serif", color: '#6B5B4E' }}>
+                            {new Date(announcement.created_at).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Expand/collapse chevron */}
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{
+                          color: '#6B5B4E',
+                          flexShrink: 0,
+                          transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)',
+                          transition: 'transform 0.2s',
+                          marginTop: '2px',
                         }}
                       >
-                        {announcement.title}
-                      </h3>
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </button>
+
+                  {/* Expanded body */}
+                  {isExpanded && (
+                    <div
+                      style={{
+                        padding: '16px',
+                        background: 'rgba(217,119,6,0.05)',
+                        border: '1px solid rgba(217,119,6,0.2)',
+                        borderTop: 'none',
+                        borderRadius: '0 0 8px 8px',
+                      }}
+                    >
                       <p
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: '13px',
-                          color: '#A89880',
-                          margin: '0 0 8px 0',
-                          lineHeight: 1.5,
+                          fontSize: '15px',
+                          color: '#F5F0E8',
+                          lineHeight: 1.6,
+                          margin: 0,
                         }}
                       >
                         {announcement.body}
                       </p>
-                      <div
-                        style={{
-                          display: 'flex',
-                          gap: '12px',
-                          fontSize: '12px',
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            color: '#6B5B4E',
-                          }}
-                        >
-                          From {author?.name || 'Unknown'}
-                        </span>
-                        <span
-                          style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            color: '#6B5B4E',
-                          }}
-                        >
-                          {new Date(announcement.created_at).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </span>
-                        {isRead && (
-                          <span
-                            style={{
-                              fontFamily: "'DM Sans', sans-serif",
-                              color: '#D97706',
-                            }}
-                          >
-                            ✓ Read
-                          </span>
-                        )}
-                      </div>
                     </div>
-                  </div>
-                </button>
+                  )}
+                </div>
               )
             })}
           </div>
         )}
       </div>
+
+      <BottomNav />
     </main>
   )
 }

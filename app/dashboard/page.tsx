@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
-import Link from 'next/link'
+import BottomNav from '@/app/components/BottomNav'
 
 interface User {
   id: string
@@ -46,15 +46,11 @@ export default function Dashboard() {
 
   // Form state
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    title: '',
-    body: '',
-  })
+  const [formData, setFormData] = useState({ title: '', body: '' })
   const [submitting, setSubmitting] = useState(false)
   const [selectedAnnouncementId, setSelectedAnnouncementId] = useState<string | null>(null)
   const [readReceipts, setReadReceipts] = useState<Record<string, AnnouncementRead[]>>({})
 
-  // Check auth and load data
   useEffect(() => {
     const checkAuthAndLoadData = async () => {
       const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
@@ -64,7 +60,6 @@ export default function Dashboard() {
         return
       }
 
-      // Get user profile
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('*')
@@ -79,7 +74,6 @@ export default function Dashboard() {
 
       setUser(userData as User)
 
-      // Get organization
       const { data: orgData, error: orgError } = await supabase
         .from('organizations')
         .select('*')
@@ -94,7 +88,6 @@ export default function Dashboard() {
 
       setOrg(orgData as Organization)
 
-      // Load announcements and org users
       await Promise.all([
         loadAnnouncements(userData.org_id),
         loadOrgUsers(userData.org_id),
@@ -136,9 +129,7 @@ export default function Dashboard() {
   }
 
   const loadReadReceipts = async (announcementId: string) => {
-    if (readReceipts[announcementId]) {
-      return
-    }
+    if (readReceipts[announcementId]) return
 
     const { data, error } = await supabase
       .from('announcement_reads')
@@ -150,15 +141,11 @@ export default function Dashboard() {
       return
     }
 
-    setReadReceipts((prev) => ({
-      ...prev,
-      [announcementId]: data as AnnouncementRead[],
-    }))
+    setReadReceipts((prev) => ({ ...prev, [announcementId]: data as AnnouncementRead[] }))
   }
 
   const handleCreateAnnouncement = async (e: React.FormEvent) => {
     e.preventDefault()
-
     if (!user || !org) return
 
     setSubmitting(true)
@@ -179,7 +166,6 @@ export default function Dashboard() {
       return
     }
 
-    // Reset form and reload announcements
     setFormData({ title: '', body: '' })
     setShowForm(false)
     await loadAnnouncements(user.org_id)
@@ -213,21 +199,22 @@ export default function Dashboard() {
   const staffCount = orgUsers.filter((u) => u.role === 'staff').length
 
   return (
-    <main className="min-h-screen" style={{ background: '#141210' }}>
+    <main className="min-h-screen pb-16 md:pb-0" style={{ background: '#141210' }}>
       {/* Navigation */}
       <nav
-        className="border-b"
+        className="border-b sticky top-0 z-40"
         style={{
           background: '#1C1917',
           borderColor: 'rgba(255,255,255,0.08)',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 md:h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2 md:gap-3 min-w-0">
             <div
               style={{
-                width: '32px',
-                height: '32px',
+                width: '28px',
+                height: '28px',
+                flexShrink: 0,
                 background: 'rgba(217,119,6,0.15)',
                 border: '1px solid rgba(217,119,6,0.3)',
                 borderRadius: '4px',
@@ -235,16 +222,17 @@ export default function Dashboard() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#D97706',
-                fontSize: '16px',
+                fontSize: '14px',
                 fontWeight: 700,
               }}
             >
               ✓
             </div>
             <span
+              className="truncate"
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: '18px',
+                fontSize: '16px',
                 fontWeight: 600,
                 color: '#F5F0E8',
               }}
@@ -252,8 +240,9 @@ export default function Dashboard() {
               {org.name}
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
             <span
+              className="hidden sm:block"
               style={{
                 fontSize: '13px',
                 color: '#A89880',
@@ -271,6 +260,8 @@ export default function Dashboard() {
                 border: 'none',
                 cursor: 'pointer',
                 fontFamily: "'DM Sans', sans-serif",
+                padding: '8px 0',
+                minHeight: '44px',
               }}
               className="hover:opacity-70 transition-opacity"
             >
@@ -280,17 +271,18 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-12">
         {/* Header */}
-        <div style={{ marginBottom: '40px' }}>
+        <div style={{ marginBottom: '24px' }}>
           <h1
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '32px',
+              fontSize: '26px',
               fontWeight: 700,
               color: '#F5F0E8',
-              marginBottom: '8px',
+              marginBottom: '6px',
             }}
+            className="md:text-4xl"
           >
             Dashboard
           </h1>
@@ -301,44 +293,38 @@ export default function Dashboard() {
               color: '#A89880',
             }}
           >
-            {staffCount} team members • {announcements.length} announcements
+            {staffCount} team members · {announcements.length} announcements
           </p>
         </div>
 
         {error && (
           <div
             style={{
-              marginBottom: '20px',
+              marginBottom: '16px',
               padding: '12px 16px',
               background: 'rgba(239,68,68,0.08)',
               border: '1px solid rgba(239,68,68,0.2)',
               borderRadius: '4px',
             }}
           >
-            <p
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '13px',
-                color: '#FCA5A5',
-              }}
-            >
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#FCA5A5' }}>
               {error}
             </p>
           </div>
         )}
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* Left Column - Announcements List */}
-          <div className="col-span-2">
+        {/* Desktop: 3-col grid. Mobile: single column stacked */}
+        <div className="md:grid md:grid-cols-3 md:gap-6">
+          {/* Announcements Column */}
+          <div className="md:col-span-2">
             {/* Create Announcement Button */}
             {isManager && (
               <button
                 onClick={() => setShowForm(!showForm)}
                 style={{
                   width: '100%',
-                  marginBottom: '24px',
-                  padding: '12px 16px',
+                  marginBottom: '16px',
+                  padding: '0 16px',
                   background: '#D97706',
                   color: '#1C1917',
                   border: 'none',
@@ -347,6 +333,10 @@ export default function Dashboard() {
                   fontSize: '14px',
                   fontWeight: 500,
                   cursor: 'pointer',
+                  minHeight: '48px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
                 className="hover:opacity-90 transition-opacity"
               >
@@ -359,14 +349,14 @@ export default function Dashboard() {
               <form
                 onSubmit={handleCreateAnnouncement}
                 style={{
-                  marginBottom: '24px',
-                  padding: '20px',
+                  marginBottom: '16px',
+                  padding: '16px',
                   background: 'rgba(255,255,255,0.04)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: '8px',
                 }}
               >
-                <div style={{ marginBottom: '16px' }}>
+                <div style={{ marginBottom: '14px' }}>
                   <label
                     style={{
                       display: 'block',
@@ -388,7 +378,7 @@ export default function Dashboard() {
                     style={{
                       width: '100%',
                       fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
+                      fontSize: '16px',
                       color: '#F5F0E8',
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid rgba(255,255,255,0.12)',
@@ -400,7 +390,7 @@ export default function Dashboard() {
                   />
                 </div>
 
-                <div style={{ marginBottom: '16px' }}>
+                <div style={{ marginBottom: '14px' }}>
                   <label
                     style={{
                       display: 'block',
@@ -421,7 +411,7 @@ export default function Dashboard() {
                     style={{
                       width: '100%',
                       fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
+                      fontSize: '16px',
                       color: '#F5F0E8',
                       background: 'rgba(255,255,255,0.04)',
                       border: '1px solid rgba(255,255,255,0.12)',
@@ -429,7 +419,7 @@ export default function Dashboard() {
                       padding: '12px 16px',
                       outline: 'none',
                       boxSizing: 'border-box',
-                      minHeight: '120px',
+                      minHeight: '100px',
                       resize: 'vertical',
                     }}
                   />
@@ -439,7 +429,8 @@ export default function Dashboard() {
                   type="submit"
                   disabled={submitting || !formData.title || !formData.body}
                   style={{
-                    padding: '12px 24px',
+                    padding: '0 24px',
+                    minHeight: '48px',
                     background: submitting ? '#6B5B4E' : '#D97706',
                     color: '#1C1917',
                     border: 'none',
@@ -457,51 +448,46 @@ export default function Dashboard() {
             )}
 
             {/* Announcements List */}
-            <div>
-              {announcements.length === 0 ? (
-                <div
-                  style={{
-                    padding: '32px',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    borderRadius: '8px',
-                    textAlign: 'center',
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '14px',
-                      color: '#A89880',
-                    }}
-                  >
-                    No announcements yet
-                  </p>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {announcements.map((announcement) => {
-                    const readCount = readReceipts[announcement.id]?.length || 0
-                    const readPercentage = staffCount ? Math.round((readCount / staffCount) * 100) : 0
+            {announcements.length === 0 ? (
+              <div
+                style={{
+                  padding: '32px',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  borderRadius: '8px',
+                  textAlign: 'center',
+                }}
+              >
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '14px', color: '#A89880' }}>
+                  No announcements yet
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {announcements.map((announcement) => {
+                  const readCount = readReceipts[announcement.id]?.length || 0
+                  const readPercentage = staffCount ? Math.round((readCount / staffCount) * 100) : 0
+                  const isSelected = selectedAnnouncementId === announcement.id
 
-                    return (
+                  return (
+                    <div key={announcement.id}>
                       <button
-                        key={announcement.id}
                         onClick={() => {
-                          setSelectedAnnouncementId(announcement.id)
-                          loadReadReceipts(announcement.id)
+                          if (isSelected) {
+                            setSelectedAnnouncementId(null)
+                          } else {
+                            setSelectedAnnouncementId(announcement.id)
+                            loadReadReceipts(announcement.id)
+                          }
                         }}
                         style={{
                           width: '100%',
-                          padding: '16px',
-                          background:
-                            selectedAnnouncementId === announcement.id
-                              ? 'rgba(217,119,6,0.1)'
-                              : 'rgba(255,255,255,0.04)',
-                          border:
-                            selectedAnnouncementId === announcement.id
-                              ? '1px solid rgba(217,119,6,0.3)'
-                              : '1px solid rgba(255,255,255,0.08)',
+                          padding: '14px 16px',
+                          minHeight: '56px',
+                          background: isSelected ? 'rgba(217,119,6,0.1)' : 'rgba(255,255,255,0.04)',
+                          border: isSelected
+                            ? '1px solid rgba(217,119,6,0.3)'
+                            : '1px solid rgba(255,255,255,0.08)',
                           borderRadius: '8px',
                           textAlign: 'left',
                           cursor: 'pointer',
@@ -513,8 +499,8 @@ export default function Dashboard() {
                           style={{
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'start',
-                            marginBottom: '8px',
+                            alignItems: 'flex-start',
+                            marginBottom: '6px',
                           }}
                         >
                           <h3
@@ -524,6 +510,8 @@ export default function Dashboard() {
                               fontWeight: 500,
                               color: '#F5F0E8',
                               margin: 0,
+                              flex: 1,
+                              paddingRight: '12px',
                             }}
                           >
                             {announcement.title}
@@ -532,8 +520,7 @@ export default function Dashboard() {
                             style={{
                               display: 'flex',
                               alignItems: 'center',
-                              gap: '6px',
-                              marginLeft: '12px',
+                              gap: '4px',
                               flexShrink: 0,
                             }}
                           >
@@ -547,14 +534,8 @@ export default function Dashboard() {
                             >
                               {readCount}
                             </span>
-                            <span
-                              style={{
-                                fontFamily: "'DM Sans', sans-serif",
-                                fontSize: '12px',
-                                color: '#6B5B4E',
-                              }}
-                            >
-                              of {staffCount}
+                            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#6B5B4E' }}>
+                              /{staffCount}
                             </span>
                           </div>
                         </div>
@@ -573,7 +554,7 @@ export default function Dashboard() {
                         <div
                           style={{
                             width: '100%',
-                            height: '4px',
+                            height: '3px',
                             background: 'rgba(255,255,255,0.08)',
                             borderRadius: '2px',
                             overflow: 'hidden',
@@ -589,15 +570,105 @@ export default function Dashboard() {
                           />
                         </div>
                       </button>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
+
+                      {/* Mobile: inline read receipts panel below selected announcement */}
+                      {isSelected && (
+                        <div
+                          className="md:hidden mt-2"
+                          style={{
+                            padding: '16px',
+                            background: 'rgba(255,255,255,0.04)',
+                            border: '1px solid rgba(255,255,255,0.08)',
+                            borderRadius: '8px',
+                          }}
+                        >
+                          <h3
+                            style={{
+                              fontFamily: "'DM Sans', sans-serif",
+                              fontSize: '11px',
+                              fontWeight: 700,
+                              color: '#A89880',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              margin: '0 0 12px 0',
+                            }}
+                          >
+                            Read Receipts
+                          </h3>
+
+                          <div style={{ marginBottom: '14px' }}>
+                            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#6B5B4E', margin: '0 0 6px 0' }}>
+                              Read by {selectedReadReceipts.length} of {staffCount}
+                            </p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <div
+                                style={{
+                                  flex: 1,
+                                  height: '5px',
+                                  background: 'rgba(255,255,255,0.08)',
+                                  borderRadius: '3px',
+                                  overflow: 'hidden',
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    height: '100%',
+                                    width: `${staffCount ? Math.round((selectedReadReceipts.length / staffCount) * 100) : 0}%`,
+                                    background: '#D97706',
+                                  }}
+                                />
+                              </div>
+                              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', fontWeight: 500, color: '#F5F0E8', minWidth: '32px' }}>
+                                {staffCount ? Math.round((selectedReadReceipts.length / staffCount) * 100) : 0}%
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="space-y-2 max-h-48 overflow-y-auto">
+                            {selectedReadReceipts.length === 0 ? (
+                              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#6B5B4E' }}>
+                                No one has read this yet
+                              </p>
+                            ) : (
+                              selectedReadReceipts.map((receipt) => {
+                                const reader = orgUsers.find((u) => u.id === receipt.user_id)
+                                if (!reader) return null
+                                return (
+                                  <div
+                                    key={receipt.user_id}
+                                    style={{
+                                      padding: '8px',
+                                      background: 'rgba(217,119,6,0.05)',
+                                      border: '1px solid rgba(217,119,6,0.2)',
+                                      borderRadius: '4px',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '8px',
+                                    }}
+                                  >
+                                    <span style={{ width: '6px', height: '6px', background: '#D97706', borderRadius: '50%', flexShrink: 0 }} />
+                                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', fontWeight: 500, color: '#F5F0E8', flex: 1 }}>
+                                      {reader.name}
+                                    </span>
+                                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '11px', color: '#6B5B4E' }}>
+                                      {new Date(receipt.read_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                                    </span>
+                                  </div>
+                                )
+                              })
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
 
-          {/* Right Column - Read Receipts Detail */}
-          <div className="col-span-1">
+          {/* Desktop-only: Right Column - Read Receipts Detail */}
+          <div className="hidden md:block md:col-span-1">
             {selectedAnnouncement ? (
               <div
                 style={{
@@ -606,13 +677,13 @@ export default function Dashboard() {
                   border: '1px solid rgba(255,255,255,0.08)',
                   borderRadius: '8px',
                   position: 'sticky',
-                  top: '20px',
+                  top: '76px',
                 }}
               >
                 <h3
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px',
+                    fontSize: '11px',
                     fontWeight: 700,
                     color: '#A89880',
                     textTransform: 'uppercase',
@@ -623,30 +694,11 @@ export default function Dashboard() {
                   Read Receipts
                 </h3>
 
-                <div
-                  style={{
-                    marginBottom: '20px',
-                    paddingBottom: '16px',
-                    borderBottom: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '12px',
-                      color: '#6B5B4E',
-                      margin: '0 0 4px 0',
-                    }}
-                  >
+                <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#6B5B4E', margin: '0 0 6px 0' }}>
                     Read by {selectedReadReceipts.length} of {staffCount}
                   </p>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                    }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <div
                       style={{
                         flex: 1,
@@ -659,51 +711,24 @@ export default function Dashboard() {
                       <div
                         style={{
                           height: '100%',
-                          width: `${
-                            staffCount ? Math.round((selectedReadReceipts.length / staffCount) * 100) : 0
-                          }%`,
+                          width: `${staffCount ? Math.round((selectedReadReceipts.length / staffCount) * 100) : 0}%`,
                           background: '#D97706',
                         }}
                       />
                     </div>
-                    <span
-                      style={{
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: '12px',
-                        fontWeight: 500,
-                        color: '#F5F0E8',
-                        minWidth: '35px',
-                      }}
-                    >
-                      {staffCount
-                        ? Math.round((selectedReadReceipts.length / staffCount) * 100)
-                        : 0}
-                      %
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', fontWeight: 500, color: '#F5F0E8', minWidth: '35px' }}>
+                      {staffCount ? Math.round((selectedReadReceipts.length / staffCount) * 100) : 0}%
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <h4
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: '12px',
-                      fontWeight: 600,
-                      color: '#F5F0E8',
-                      margin: '0 0 12px 0',
-                    }}
-                  >
+                  <h4 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', fontWeight: 600, color: '#F5F0E8', margin: '0 0 12px 0' }}>
                     Read by:
                   </h4>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {selectedReadReceipts.length === 0 ? (
-                      <p
-                        style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontSize: '12px',
-                          color: '#6B5B4E',
-                        }}
-                      >
+                      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', color: '#6B5B4E' }}>
                         No one has read this yet
                       </p>
                     ) : (
@@ -720,48 +745,14 @@ export default function Dashboard() {
                               borderRadius: '4px',
                             }}
                           >
-                            <div
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                marginBottom: '2px',
-                              }}
-                            >
-                              <span
-                                style={{
-                                  width: '6px',
-                                  height: '6px',
-                                  background: '#D97706',
-                                  borderRadius: '50%',
-                                }}
-                              />
-                              <span
-                                style={{
-                                  fontFamily: "'DM Sans', sans-serif",
-                                  fontSize: '12px',
-                                  fontWeight: 500,
-                                  color: '#F5F0E8',
-                                }}
-                              >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
+                              <span style={{ width: '6px', height: '6px', background: '#D97706', borderRadius: '50%' }} />
+                              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '12px', fontWeight: 500, color: '#F5F0E8' }}>
                                 {reader.name}
                               </span>
                             </div>
-                            <p
-                              style={{
-                                fontFamily: "'DM Sans', sans-serif",
-                                fontSize: '11px',
-                                color: '#6B5B4E',
-                                margin: 0,
-                                paddingLeft: '14px',
-                              }}
-                            >
-                              {new Date(receipt.read_at).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric',
-                                hour: '2-digit',
-                                minute: '2-digit',
-                              })}
+                            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '11px', color: '#6B5B4E', margin: 0, paddingLeft: '14px' }}>
+                              {new Date(receipt.read_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                             </p>
                           </div>
                         )
@@ -780,13 +771,7 @@ export default function Dashboard() {
                   textAlign: 'center',
                 }}
               >
-                <p
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '13px',
-                    color: '#6B5B4E',
-                  }}
-                >
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '13px', color: '#6B5B4E' }}>
                   Select an announcement to view read receipts
                 </p>
               </div>
@@ -794,6 +779,8 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <BottomNav />
     </main>
   )
 }
