@@ -64,10 +64,24 @@ export default function Dashboard() {
       setLoading(true)
       setError('')
 
-      // Get authenticated user
-      const { data: { user: authUser }, error: authError } = await supabase.auth.getUser()
+      // Get authenticated user with timeout
+      let authUser = null
+      let authError = null
+      try {
+        const authPromise = supabase.auth.getUser()
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Auth check timed out after 5 seconds')), 5000)
+        )
+        const result = await Promise.race([authPromise, timeoutPromise]) as any
+        authUser = result?.data?.user
+        authError = result?.error
+      } catch (err) {
+        console.error('Auth error:', err)
+        authError = err
+      }
 
       if (authError || !authUser) {
+        console.log('No authenticated user, redirecting to login')
         setRedirecting(true)
         router.push('/login')
         return
