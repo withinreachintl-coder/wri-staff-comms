@@ -55,6 +55,8 @@ export default function Dashboard() {
   const [redirecting, setRedirecting] = useState(false)
   const [trialDaysLeft, setTrialDaysLeft] = useState(0)
   const [debugInfo, setDebugInfo] = useState('')
+  const [editingOrgName, setEditingOrgName] = useState(false)
+  const [orgNameInput, setOrgNameInput] = useState('')
 
   useEffect(() => {
     console.log('[Dashboard] Component mounted, calling loadDashboard')
@@ -138,6 +140,7 @@ export default function Dashboard() {
       }
 
       setContextOrg(orgData)
+      setOrgNameInput(orgData.name)
 
       // Calculate trial days left
       if (orgData.subscription_status === 'trial' && orgData.trial_ends_at) {
@@ -193,6 +196,27 @@ export default function Dashboard() {
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/')
+  }
+
+  const handleSaveOrgName = async () => {
+    if (!orgNameInput.trim() || !contextOrg) return
+
+    try {
+      const { error } = await supabase
+        .from('organizations')
+        .update({ name: orgNameInput })
+        .eq('id', contextOrg.id)
+
+      if (error) {
+        console.error('Failed to update org name:', error)
+        return
+      }
+
+      setContextOrg({ ...contextOrg, name: orgNameInput })
+      setEditingOrgName(false)
+    } catch (err) {
+      console.error('Error saving org name:', err)
+    }
   }
 
   if (loading || redirecting) {
@@ -259,13 +283,82 @@ export default function Dashboard() {
       {/* Header */}
       <header style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div>
-            <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0 }}>
-              {contextOrg?.name}
-            </h1>
-            <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#F5F0E8', margin: '4px 0 0 0' }}>
-              Staff Communications
-            </p>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {editingOrgName ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="text"
+                  value={orgNameInput}
+                  onChange={(e) => setOrgNameInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSaveOrgName()
+                    if (e.key === 'Escape') {
+                      setEditingOrgName(false)
+                      setOrgNameInput(contextOrg?.name || '')
+                    }
+                  }}
+                  autoFocus
+                  style={{
+                    fontFamily: 'var(--font-playfair), "Playfair Display", serif',
+                    fontSize: '20px',
+                    fontWeight: 700,
+                    color: '#F5F0E8',
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid #D97706',
+                    borderRadius: '4px',
+                    padding: '8px 12px',
+                    outline: 'none',
+                  }}
+                />
+                <button
+                  onClick={handleSaveOrgName}
+                  style={{
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    color: '#1C1917',
+                    background: '#D97706',
+                    border: 'none',
+                    borderRadius: '4px',
+                    padding: '6px 12px',
+                    cursor: 'pointer',
+                  }}
+                  className="hover:opacity-90 transition-opacity"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => {
+                    setEditingOrgName(false)
+                    setOrgNameInput(contextOrg?.name || '')
+                  }}
+                  style={{
+                    fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    color: '#F5F0E8',
+                    background: 'transparent',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '4px',
+                    padding: '6px 12px',
+                    cursor: 'pointer',
+                  }}
+                  className="hover:opacity-80 transition-opacity"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <div>
+                <h1 style={{ fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '20px', fontWeight: 700, color: '#F5F0E8', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => setEditingOrgName(true)}>
+                  {contextOrg?.name}
+                  <span style={{ fontSize: '14px', opacity: 0.6 }}>✎</span>
+                </h1>
+                <p style={{ fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', color: '#F5F0E8', margin: '4px 0 0 0' }}>
+                  Staff Communications
+                </p>
+              </div>
+            )}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ textAlign: 'right' }}>
