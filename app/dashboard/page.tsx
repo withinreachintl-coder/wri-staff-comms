@@ -54,34 +54,43 @@ export default function Dashboard() {
   const [error, setError] = useState('')
   const [redirecting, setRedirecting] = useState(false)
   const [trialDaysLeft, setTrialDaysLeft] = useState(0)
+  const [debugInfo, setDebugInfo] = useState('')
 
   useEffect(() => {
+    console.log('[Dashboard] Component mounted, calling loadDashboard')
     loadDashboard()
   }, [])
 
   const loadDashboard = async () => {
     try {
+      console.log('[Dashboard] loadDashboard() called')
       setLoading(true)
       setError('')
+      setDebugInfo('Loading auth...')
 
       // Get authenticated user with timeout
       let authUser = null
       let authError = null
       try {
+        console.log('[Dashboard] Calling supabase.auth.getUser()')
+        setDebugInfo('Auth check in progress...')
         const authPromise = supabase.auth.getUser()
         const timeoutPromise = new Promise((_, reject) =>
           setTimeout(() => reject(new Error('Auth check timed out after 5 seconds')), 5000)
         )
         const result = await Promise.race([authPromise, timeoutPromise]) as any
+        console.log('[Dashboard] Auth result:', result)
         authUser = result?.data?.user
         authError = result?.error
       } catch (err) {
-        console.error('Auth error:', err)
+        console.error('[Dashboard] Auth error:', err)
+        setDebugInfo(`Auth error: ${err instanceof Error ? err.message : String(err)}`)
         authError = err
       }
 
       if (authError || !authUser) {
-        console.log('No authenticated user, redirecting to login')
+        console.log('[Dashboard] No authenticated user, redirecting to login', { authError, authUser })
+        setDebugInfo('Not authenticated, redirecting...')
         setRedirecting(true)
         router.push('/login')
         return
@@ -172,9 +181,11 @@ export default function Dashboard() {
       }
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : String(err)
-      console.error('Dashboard error:', err)
+      console.error('[Dashboard] Caught error:', err)
+      setDebugInfo(`Error: ${errorMsg}`)
       setError(`Dashboard error: ${errorMsg}`)
     } finally {
+      console.log('[Dashboard] Finally block, setting loading=false')
       setLoading(false)
     }
   }
@@ -186,9 +197,16 @@ export default function Dashboard() {
 
   if (loading || redirecting) {
     return (
-      <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 300 }}>
-          {redirecting ? 'Redirecting to login...' : 'Loading dashboard...'}
+      <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+        <div style={{ textAlign: 'center', maxWidth: '500px' }}>
+          <div style={{ color: '#F5F0E8', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '14px', fontWeight: 300, marginBottom: '16px' }}>
+            {redirecting ? 'Redirecting to login...' : 'Loading dashboard...'}
+          </div>
+          {debugInfo && (
+            <div style={{ color: '#D97706', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '12px', fontWeight: 300, background: 'rgba(217,119,6,0.1)', padding: '12px', borderRadius: '4px', border: '1px solid rgba(217,119,6,0.2)', wordBreak: 'break-word' }}>
+              {debugInfo}
+            </div>
+          )}
         </div>
       </main>
     )
