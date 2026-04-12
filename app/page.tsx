@@ -134,7 +134,7 @@ export default function Home() {
             Everything your team needs, nothing it doesn't
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Announcements */}
             <div
               className="p-6"
@@ -299,7 +299,7 @@ export default function Home() {
             impossible to miss.
           </p>
 
-          <div className="grid sm:grid-cols-2 gap-6 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
             <div
               className="p-5"
               style={{
