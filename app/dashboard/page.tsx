@@ -96,7 +96,7 @@ export default function Dashboard() {
       }
 
       if (userError || !userData) {
-        setError('Failed to load user profile')
+        setError(`Failed to load user profile: ${userError?.message || 'User not found'}`)
         return
       }
 
@@ -110,7 +110,7 @@ export default function Dashboard() {
         .single()
 
       if (orgError || !orgData) {
-        setError('Failed to load organization')
+        setError(`Failed to load organization: ${orgError?.message || 'Organization not found'}`)
         return
       }
 
@@ -157,8 +157,9 @@ export default function Dashboard() {
         setShiftSwaps(shiftSwapData)
       }
     } catch (err) {
+      const errorMsg = err instanceof Error ? err.message : String(err)
       console.error('Dashboard error:', err)
-      setError('An unexpected error occurred')
+      setError(`Dashboard error: ${errorMsg}`)
     } finally {
       setLoading(false)
     }
