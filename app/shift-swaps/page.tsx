@@ -367,7 +367,7 @@ export default function ShiftSwapsPage() {
         {showNewForm && (
           <div style={{ background: '#FFFFFF', border: '1px solid #E5E0D8', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', padding: '24px', marginBottom: '32px' }}>
             <form onSubmit={handleCreateShiftSwap}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: '20px', marginBottom: '20px' }}>
                 <div>
                   <label style={{ display: 'block', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', fontSize: '13px', fontWeight: 500, color: '#1C1917', marginBottom: '8px' }}>
                     Shift date
@@ -382,8 +382,8 @@ export default function ShiftSwapsPage() {
                       fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                       fontSize: '14px',
                       color: '#1C1917',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.12)',
+                      background: '#FFFFFF',
+                      border: '1px solid #E5E0D8',
                       borderRadius: '4px',
                       padding: '10px 12px',
                       outline: 'none',
@@ -406,8 +406,8 @@ export default function ShiftSwapsPage() {
                       fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                       fontSize: '14px',
                       color: '#1C1917',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.12)',
+                      background: '#FFFFFF',
+                      border: '1px solid #E5E0D8',
                       borderRadius: '4px',
                       padding: '10px 12px',
                       outline: 'none',
@@ -430,8 +430,8 @@ export default function ShiftSwapsPage() {
                     fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif',
                     fontSize: '14px',
                     color: '#1C1917',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.12)',
+                    background: '#FFFFFF',
+                    border: '1px solid #E5E0D8',
                     borderRadius: '4px',
                     padding: '10px 12px',
                     outline: 'none',
@@ -583,7 +583,7 @@ export default function ShiftSwapsPage() {
                         fontWeight: 500,
                         color: '#1C1917',
                         background: 'transparent',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        border: '1px solid #E5E0D8',
                         borderRadius: '4px',
                         padding: '8px 16px',
                         cursor: 'pointer',
@@ -600,7 +600,7 @@ export default function ShiftSwapsPage() {
         ) : (
           <div
             style={{
-              background: 'rgba(255,255,255,0.04)',
+              background: '#FFFFFF',
               border: '1px dashed #E5E0D8',
               borderRadius: '8px',
               padding: '40px 24px',
