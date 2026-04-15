@@ -115,9 +115,11 @@ export async function GET(request: Request) {
         console.error('Org setup error (non-fatal):', e)
       }
 
-      // Always redirect to dashboard regardless
-      console.log('[Auth Callback] Auth successful, redirecting to /dashboard')
-      return NextResponse.redirect(new URL('/dashboard', request.url))
+      // Redirect to intended destination or dashboard
+      const next = requestUrl.searchParams.get('next') || '/dashboard'
+      const redirectTo = next.startsWith('/') ? next : '/dashboard'
+      console.log('[Auth Callback] Auth successful, redirecting to', redirectTo)
+      return NextResponse.redirect(new URL(redirectTo, request.url))
     } catch (error) {
       const errorMsg = error instanceof Error ? error.message : String(error)
       console.error('[Auth Callback] Unexpected error:', {
