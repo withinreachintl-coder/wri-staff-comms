@@ -20,7 +20,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body style={{ minHeight: '100vh', backgroundColor: '#1C1917' }}>{children}</body>
+      <body style={{ minHeight: '100vh', backgroundColor: '#1C1917', color: '#1C1917' }}>{children}</body>
     </html>
   )
 }

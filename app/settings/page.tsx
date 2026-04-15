@@ -246,6 +246,7 @@ export default function SettingsPage() {
                 }}
               />
               <p
+                className="field-help-text"
                 style={{
                   fontFamily: 'var(--font-dmsans)',
                   fontSize: '12px',
@@ -288,6 +289,7 @@ export default function SettingsPage() {
                 }}
               />
               <p
+                className="field-help-text"
                 style={{
                   fontFamily: 'var(--font-dmsans)',
                   fontSize: '12px',

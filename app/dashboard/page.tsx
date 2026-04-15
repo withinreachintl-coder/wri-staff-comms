@@ -485,7 +485,7 @@ export default function Dashboard() {
 
       {/* Main content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr]" style={{ gap: '32px' }}>
+        <div className="dashboard-grid" style={{ gap: '32px', alignItems: 'start' }}>
           {/* Announcements section */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
