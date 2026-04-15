@@ -180,7 +180,7 @@ export default function AnnouncementsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#1C1917' }}>
-        <p style={{ color: '#1C1917', fontFamily: "'DM Sans', sans-serif" }}>Loading...</p>
+        <p style={{ color: '#F5F0E8', fontFamily: "'DM Sans', sans-serif" }}>Loading...</p>
       </div>
     )
   }
@@ -188,7 +188,7 @@ export default function AnnouncementsPage() {
   if (!user || !org) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: '#1C1917' }}>
-        <p style={{ color: '#1C1917' }}>Unauthorized access</p>
+        <p style={{ color: '#F5F0E8' }}>Unauthorized access</p>
       </div>
     )
   }
@@ -227,7 +227,7 @@ export default function AnnouncementsPage() {
                 fontFamily: "'Playfair Display', serif",
                 fontSize: '18px',
                 fontWeight: 600,
-                color: '#1C1917',
+                color: '#F5F0E8',
               }}
             >
               {org.name}
@@ -237,7 +237,7 @@ export default function AnnouncementsPage() {
             <span
               style={{
                 fontSize: '13px',
-                color: '#1C1917',
+                color: '#F5F0E8',
                 fontFamily: "'DM Sans', sans-serif",
               }}
             >
@@ -247,7 +247,7 @@ export default function AnnouncementsPage() {
               onClick={handleSignOut}
               style={{
                 fontSize: '13px',
-                color: '#6B5B4E',
+                color: '#A89880',
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
@@ -315,7 +315,7 @@ export default function AnnouncementsPage() {
               style={{
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '14px',
-                color: '#6B5B4E',
+                color: '#1C1917',
                 textAlign: 'center',
               }}
             >
@@ -344,12 +344,12 @@ export default function AnnouncementsPage() {
                       selectedAnnouncementId === announcement.id
                         ? 'rgba(217,119,6,0.1)'
                         : isRead
-                          ? 'rgba(255,255,255,0.02)'
-                          : 'rgba(255,255,255,0.04)',
+                          ? '#F9F7F4'
+                          : '#FFFFFF',
                     border:
                       selectedAnnouncementId === announcement.id
                         ? '1px solid rgba(217,119,6,0.3)'
-                        : '1px solid rgba(255,255,255,0.08)',
+                        : '1px solid #E5E0D8',
                     borderRadius: '8px',
                     textAlign: 'left',
                     cursor: 'pointer',
@@ -370,7 +370,7 @@ export default function AnnouncementsPage() {
                         width: '12px',
                         height: '12px',
                         borderRadius: '50%',
-                        background: isRead ? '#D97706' : 'rgba(255,255,255,0.3)',
+                        background: isRead ? '#D97706' : '#D4CAC0',
                         marginTop: '6px',
                         flexShrink: 0,
                       }}
@@ -410,7 +410,7 @@ export default function AnnouncementsPage() {
                         <span
                           style={{
                             fontFamily: "'DM Sans', sans-serif",
-                            color: '#6B5B4E',
+                            color: '#1C1917',
                           }}
                         >
                           From {author?.name || 'Unknown'}
@@ -418,7 +418,7 @@ export default function AnnouncementsPage() {
                         <span
                           style={{
                             fontFamily: "'DM Sans', sans-serif",
-                            color: '#6B5B4E',
+                            color: '#1C1917',
                           }}
                         >
                           {new Date(announcement.created_at).toLocaleDateString('en-US', {

@@ -240,10 +240,10 @@ export default function Dashboard() {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
         <div style={{ maxWidth: '600px', textAlign: 'center' }}>
-          <h1 style={{ color: '#1C1917', fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '24px', marginBottom: '16px' }}>
+          <h1 style={{ color: '#F5F0E8', fontFamily: 'var(--font-playfair), "Playfair Display", serif', fontSize: '24px', marginBottom: '16px' }}>
             Error loading dashboard
           </h1>
-          <p style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', marginBottom: '24px' }}>
+          <p style={{ color: '#F5F0E8', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif', marginBottom: '24px' }}>
             {error}
           </p>
           <button
@@ -271,7 +271,7 @@ export default function Dashboard() {
   if (!user || !contextOrg) {
     return (
       <main style={{ background: '#1C1917', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: '#1C1917', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
+        <div style={{ color: '#F5F0E8', fontFamily: 'var(--font-dmsans), "DM Sans", sans-serif' }}>
           No organization found. Please contact support.
         </div>
       </main>
@@ -282,7 +282,7 @@ export default function Dashboard() {
     <main style={{ background: '#FAFAF9', minHeight: '100vh' }}>
       {/* Header */}
       <header style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', minHeight: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', padding: '8px 0' }}>
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '12px' }}>
             {editingOrgName ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -411,7 +411,7 @@ export default function Dashboard() {
 
       {/* Navigation tabs */}
       <div style={{ background: '#1C1917', borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '32px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '32px', overflowX: 'auto' }}>
           <Link
             href="/dashboard"
             style={{
@@ -420,9 +420,11 @@ export default function Dashboard() {
               fontWeight: 500,
               color: '#F5F0E8',
               borderBottom: '2px solid #D97706',
-              padding: '16px 0',
+              padding: '0 4px',
+              minHeight: '44px',
               textDecoration: 'none',
-              display: 'block',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
             Announcements
@@ -435,9 +437,11 @@ export default function Dashboard() {
               fontWeight: 500,
               color: '#F5F0E8',
               borderBottom: '2px solid transparent',
-              padding: '16px 0',
+              padding: '0 4px',
+              minHeight: '44px',
               textDecoration: 'none',
-              display: 'block',
+              display: 'flex',
+              alignItems: 'center',
             }}
             className="hover:opacity-80 transition-opacity"
           >
@@ -481,7 +485,7 @@ export default function Dashboard() {
 
       {/* Main content */}
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+        <div className="dashboard-grid" style={{ gap: '32px', alignItems: 'start' }}>
           {/* Announcements section */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
@@ -566,7 +570,7 @@ export default function Dashboard() {
                         key={member.id}
                         style={{
                           padding: '12px 16px',
-                          borderBottom: index < teamMembers.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                          borderBottom: index < teamMembers.length - 1 ? '1px solid #E5E0D8' : 'none',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',

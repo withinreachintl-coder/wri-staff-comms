@@ -140,7 +140,7 @@ export default function SettingsPage() {
     return (
       <main style={{ background: '#FAFAF9', minHeight: '100vh', padding: '48px 24px' }}>
         <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontFamily: 'var(--font-dmsans)', color: '#6B5B4E' }}>Loading...</p>
+          <p style={{ fontFamily: 'var(--font-dmsans)', color: '#1C1917' }}>Loading...</p>
         </div>
       </main>
     )
@@ -246,10 +246,11 @@ export default function SettingsPage() {
                 }}
               />
               <p
+                className="field-help-text"
                 style={{
                   fontFamily: 'var(--font-dmsans)',
                   fontSize: '12px',
-                  color: '#A89880',
+                  color: '#1C1917',
                   margin: '6px 0 0 0',
                 }}
               >
@@ -288,10 +289,11 @@ export default function SettingsPage() {
                 }}
               />
               <p
+                className="field-help-text"
                 style={{
                   fontFamily: 'var(--font-dmsans)',
                   fontSize: '12px',
-                  color: '#A89880',
+                  color: '#1C1917',
                   margin: '6px 0 0 0',
                 }}
               >

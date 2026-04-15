@@ -6,3 +6,20 @@
   --font-playfair: 'Playfair Display', serif;
   --font-dmsans: 'DM Sans', sans-serif;
 }
+
+/* Ensure form help text is always readable on white card backgrounds */
+.field-help-text {
+  color: #1C1917 !important;
+}
+
+/* Dashboard responsive grid: single column on mobile, 2fr 1fr on desktop */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
