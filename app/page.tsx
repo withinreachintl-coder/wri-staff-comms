@@ -16,7 +16,7 @@ export default function LandingPage() {
             width: '32px', height: '32px', background: '#D97706',
             borderRadius: '6px', display: 'flex', alignItems: 'center',
             justifyContent: 'center', fontSize: '16px', color: '#fff', fontWeight: 700
-          }}>â</div>
+          }}>✓</div>
           <span style={{ fontFamily: 'Playfair Display, serif', fontSize: '18px', fontWeight: 700 }}>Staff Comms</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
@@ -38,14 +38,14 @@ export default function LandingPage() {
           <span style={{ color: '#D97706' }}>a WhatsApp group chat.</span>
         </h1>
         <p style={{ fontSize: '18px', color: '#A8A29E', lineHeight: 1.6, marginBottom: '40px', maxWidth: '560px' }}>
-          Announcements get buried. Shift swaps fall through the cracks. Staff Comms gives your restaurant team one clear place to coordinate â with read receipts so you know who saw what.
+          Announcements get buried. Shift swaps fall through the cracks. Staff Comms gives your restaurant team one clear place to coordinate — with read receipts so you know who saw what.
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
           <a href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d" target="_blank" rel="noopener noreferrer" style={{
             background: '#D97706', color: '#fff', padding: '14px 28px',
             borderRadius: '8px', textDecoration: 'none', fontWeight: 600, fontSize: '16px', display: 'inline-block'
           }}>Start 14-Day Free Trial</a>
-          <span style={{ color: '#78716C', fontSize: '14px' }}>No credit card required Â· $29/mo after trial</span>
+          <span style={{ color: '#78716C', fontSize: '14px' }}>No credit card required · $29/mo after trial</span>
         </div>
       </section>
 
@@ -59,9 +59,9 @@ export default function LandingPage() {
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px' }}>
           {[
-            { icon: 'ð', title: 'Announcements', desc: 'Broadcast updates to your entire team or specific roles. No more "did you see my message?" â you\'ll know exactly who read it.' },
-            { icon: 'ð', title: 'Shift Swaps', desc: 'Staff request a swap, teammates claim it, manager approves. Clean, traceable, no more screenshot negotiations.' },
-            { icon: 'â', title: 'Read Receipts', desc: 'See who opened your announcement and when. Follow up with the three people who missed it â not the whole team.' },
+            { icon: '👁', title: 'Announcements', desc: 'Broadcast updates to your entire team or specific roles. No more "did you see my message?" — you\'ll know exactly who read it.' },
+            { icon: '🕐', title: 'Shift Swaps', desc: 'Staff request a swap, teammates claim it, manager approves. Clean, traceable, no more screenshot negotiations.' },
+            { icon: '✓', title: 'Read Receipts', desc: 'See who opened your announcement and when. Follow up with the three people who missed it — not the whole team.' },
           ].map((f) => (
             <div key={f.title} style={{ background: '#292524', borderRadius: '12px', padding: '28px' }}>
               <div style={{
@@ -97,7 +97,7 @@ export default function LandingPage() {
           Simple, honest pricing.
         </h2>
         <p style={{ fontSize: '13px', color: '#A8A29E', marginBottom: '32px', lineHeight: '1.5' }}>
-          Standalone pricing for Staff Comms. For all three tools bundled â Daily Ops, Staff Comms, and Toolkit â see the{' '}
+          Standalone pricing for Staff Comms. For all three tools bundled — Daily Ops, Staff Comms, and Toolkit — see the{' '}
           <a href="https://wireach.tools" style={{ color: '#D97706', textDecoration: 'none' }}>full wireach.tools suite</a>.
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
@@ -108,7 +108,7 @@ export default function LandingPage() {
               $0<span style={{ fontSize: '16px', color: '#A8A29E', fontFamily: 'DM Sans, sans-serif' }}>/month</span>
             </p>
             {['Up to 5 team members', 'Announcements', 'Basic shift swap requests'].map(item => (
-              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>â {item}</p>
+              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
             ))}
             <a href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d" target="_blank" rel="noopener noreferrer" style={{
               display: 'block', textAlign: 'center', marginTop: '32px',
@@ -123,7 +123,7 @@ export default function LandingPage() {
               $29<span style={{ fontSize: '16px', color: '#A8A29E', fontFamily: 'DM Sans, sans-serif' }}>/month</span>
             </p>
             {['Unlimited team members', 'Unlimited announcements', 'Shift swap management', 'Read receipts on every message', 'Priority support'].map(item => (
-              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>â {item}</p>
+              <p key={item} style={{ color: '#A8A29E', fontSize: '14px', marginBottom: '12px' }}>✓ {item}</p>
             ))}
             <a href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d" target="_blank" rel="noopener noreferrer" style={{
               display: 'block', textAlign: 'center', marginTop: '32px',
