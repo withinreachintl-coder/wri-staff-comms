@@ -41,6 +41,28 @@ export default function LandingPage() {
         <p style={{ fontSize: '18px', color: '#A8A29E', lineHeight: 1.6, marginBottom: '40px', maxWidth: '560px' }}>
           Announcements get buried. Shift swaps fall through the cracks. Staff Comms gives your restaurant team one clear place to coordinate — with read receipts so you know who saw what.
         </p>
+
+        <div style={{
+          width: '100%',
+          maxWidth: '720px',
+          margin: '0 auto 40px',
+          aspectRatio: '16 / 9',
+          background: '#1C1917',
+          border: '1px solid #3D3832',
+          borderRadius: '12px',
+          overflow: 'hidden',
+        }}>
+          <video
+            src="/videos/staff-comms.mp4"
+            poster="/videos/staff-comms-poster.png"
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
           <a href="https://buy.stripe.com/9B67sKbxDfbDc2P76F9k40d" target="_blank" rel="noopener noreferrer" style={{
             background: '#D97706', color: '#fff', padding: '14px 28px',
